@@ -20,8 +20,8 @@ const Signup = () => {
           <input type="password" className="w-full h-14 p-2 mt-2 ml-1" />
           <Link href="/login" className="text-sm mt-4 ml-2 underline">Already have an account? Sign in here!</Link>
           <div className="flex flex-row mt-4 w-2/3 h-10 space-x-4 ml-auto">
-            <button className="w-1/2 h-full bg-white text-sm">Cancel</button> {/*What should this link to?*/}
-            <button className="w-1/2 h-full bg-white text-sm">Submit</button>
+            <button className="w-1/2 h-full bg-white text-sm hover:bg-gray-200">Cancel</button> {/*What should this link to?*/}
+            <button className="w-1/2 h-full bg-white text-sm hover:bg-gray-200">Submit</button>
           </div>
         </div>
       
