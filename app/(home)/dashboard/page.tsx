@@ -58,6 +58,7 @@ const Dashboard = () => {
         ))}
       </div>
       
+      {/*TODO: add meaningful pagination*/}
       {/*TODO: figure out why pr-3 is needed for centering*/}
       <div className="flex justify-center space-x-4 my-auto pr-3 w-full mt-6"> 
         <button>1</button>
