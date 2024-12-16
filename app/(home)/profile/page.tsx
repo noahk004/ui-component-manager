@@ -25,7 +25,7 @@ const Profile = () => {
 
       <div className="grid grid-cols-3 gap-4 mt-8"> {/* only 2 rows fit on my screen... */}
         {[...Array(6)].map((_, i) => (
-          <div key={i} className="bg-gray-200 pt-5 px-5 pb-4">
+          <Link href="/view" key={i} className="bg-gray-200 pt-5 px-5 pb-4">
             <h3 className="text-xl font-bold">My Awesome Button</h3>
             <p className="text-sm">Button</p>
             <p className="text-sm mt-2">
@@ -42,7 +42,7 @@ const Profile = () => {
                 </span>
               </div>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
 

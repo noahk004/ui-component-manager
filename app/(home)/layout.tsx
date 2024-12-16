@@ -18,7 +18,7 @@ export default function HomeLayout({
 }) {
   const pathname = usePathname()
   return (
-    <div className="flex h-screen">
+    <div className="flex h-screen"> {/* maybe extend height for pages that scroll*/}
       <div className="w-1/4 bg-gray-200 p-6 flex flex-col">
         <h1 className="text-3xl font-bold">Logo</h1>
         <nav className="flex flex-col space-y-2 mt-10 ml-1">
