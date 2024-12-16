@@ -23,7 +23,7 @@ export default function HomeLayout({
         <h1 className="text-3xl font-bold">Logo</h1>
         <nav className="flex flex-col space-y-2 mt-10 ml-1">
           {links.map(({ href, label }) => (
-            <Link href={href} className={clsx("text-xl", {
+            <Link key={href} href={href} className={clsx("text-xl", {
               'font-semibold': href === pathname,
             })}>
               {label}
