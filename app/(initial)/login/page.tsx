@@ -18,7 +18,7 @@ const Login = () => {
           <Link href="/login/resetpassword" className="text-sm mt-2 ml-2 underline">Forgot password?</Link>
           <div className="flex flex-row mt-4 w-2/3 h-10 space-x-4 ml-auto">
             <button className="w-1/2 h-full bg-white text-sm hover:bg-gray-200">Cancel</button>
-            <Link href="/home" className="w-1/2">
+            <Link href="/dashboard" className="w-1/2">
             <button className="w-full h-full bg-white text-sm hover:bg-gray-200">Submit</button>
             </Link>
           </div>

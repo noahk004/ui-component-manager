@@ -1,19 +1,34 @@
+'use client'
+
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+import clsx from 'clsx'
+
+const links = [
+  { href: '/dashboard', label: 'Browse' },
+  { href: '/profile', label: 'View Profile' },
+  { href: '/liked', label: 'Liked components' },
+  { href: '/create', label: 'Create Component' },
+]
 
 export default function HomeLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
+  const pathname = usePathname()
   return (
     <div className="flex h-screen">
       <div className="w-1/4 bg-gray-200 p-6 flex flex-col">
         <h1 className="text-3xl font-bold">Logo</h1>
         <nav className="flex flex-col space-y-2 mt-10 ml-1">
-          <Link href="/home" className="text-xl font-semibold">Browse</Link>
-          <Link href="/profile" className="text-xl">View Profile</Link>
-          <Link href="/liked" className="text-xl">Liked components</Link>
-          <Link href="/create" className="text-xl">Create Component</Link>
+          {links.map(({ href, label }) => (
+            <Link href={href} className={clsx("text-xl", {
+              'font-semibold': href === pathname,
+            })}>
+              {label}
+            </Link>
+          ))}
         </nav>
         <div className="flex flex-row mt-auto">
           <div className="w-20 h-20 bg-blue-200 rounded-full" />
