@@ -41,7 +41,7 @@ const Create = () => {
         </div>
 
         <div>
-          <label className="block mb-2">File upload</label>
+          <label className="block mb-2">File upload</label> {/* maybe move this to be side by side with tags */}
           {/* what is this supposed to say? */}
           <p className="text-sm mb-2">Upload the TS module containing the component. Ensure that c</p> 
           <button className="px-6 py-2 bg-gray-200">Choose file</button>

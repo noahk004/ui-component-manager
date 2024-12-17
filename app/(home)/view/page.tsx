@@ -86,10 +86,7 @@ export default function MyComponent() {
               <a href="/profile" className="text-sm underline">View profile</a>
             </div>
           </div>
-
           
-        
-
         </div>
       </div>
     </div>
