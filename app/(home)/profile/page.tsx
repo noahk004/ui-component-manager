@@ -1,20 +1,17 @@
 import React from 'react'
-import { Plus, Heart, Download } from 'lucide-react'
+import { Plus } from 'lucide-react'
 import Link from 'next/link'
+import ComponentCard from '@/components/ComponentCard'
+import UserBanner from '@/components/UserBanner'
 
 const Profile = () => {
   return (
     <div className="flex flex-col h-screen p-8"> {/* maybe make padding consistent across pages */}
-      <div className="flex h-1/3 w-full bg-gray-200 items-center p-8">
-        <div className="w-52 h-52 bg-blue-200 rounded-full" />
-        <div className="flex flex-col ml-2 py-4 ml-8 h-full">
-          <h1 className="text-4xl">@USERNAME</h1> {/* underline in figma, didnt make sense though */}
-          <div className="ml-1"> {/* optional, i think it looks a little better */}
-            <p className="mt-6 text-lg">Total likes: 23,193</p>
-            <p className="mt-2 text-lg">Total downloads: 492,102</p>
-          </div>
-        </div>
-      </div>
+      <UserBanner 
+        username="@USERNAME"
+        totalLikes={23193}
+        totalDownloads={492102}
+      />
 
       <div className="flex justify-between mt-10 ml-1">
         <h1 className="text-3xl font-bold">Your components</h1>
@@ -24,25 +21,17 @@ const Profile = () => {
       </div>
 
       <div className="grid grid-cols-3 gap-4 mt-8"> {/* only 2 rows fit on my screen... */}
-        {[...Array(6)].map((_, i) => (
-          <Link href="/view" key={i} className="bg-gray-200 pt-5 px-5 pb-4">
-            <h3 className="text-xl font-bold">My Awesome Button</h3>
-            <p className="text-sm">Button</p>
-            <p className="text-sm mt-2">
-              This is the button description. I'm describing what the button is. or not.
-            </p>
-            <div className="flex items-center justify-between text-sm mt-2">
-              <p>@somerandomuser</p>
-              <div className="flex space-x-4">
-                <span className="flex items-center gap-1">
-                  <Heart className="h-3 w-3" /> 293
-                </span>
-                <span className="flex items-center gap-1">
-                  <Download className="h-3 w-3" /> 293
-                </span>
-              </div>
-            </div>
-          </Link>
+      {[...Array(6)].map((_, i) => (
+          <ComponentCard
+            key={i}
+            title="My Awesome Button"
+            type="Button"
+            description="This is the button description. I'm describing what the button is. or not."
+            username="@somerandomuser"
+            likes={293}
+            downloads={293}
+            href="/view"
+          />
         ))}
       </div>
 
