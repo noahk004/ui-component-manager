@@ -39,7 +39,8 @@ jobs:
       - name: Run ESLint with reviewdog
         uses: reviewdog/action-eslint@v1
         with:
+          filter_mode: nofilter
           level: error
           reporter: github-pr-review
-          eslint_flags: "src/"
+          eslint_flags: "app/"
 
