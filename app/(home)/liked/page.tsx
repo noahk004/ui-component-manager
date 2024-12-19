@@ -1,6 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
-import { Plus, Heart, Download } from 'lucide-react'
+import { Plus } from 'lucide-react'
+import ComponentCard from '@/components/ComponentCard'
 
 const Liked = () => {
   return (
@@ -14,25 +15,17 @@ const Liked = () => {
       {/* maybe add filtering here? */}
 
       <div className="grid grid-cols-3 gap-4 mt-8">
-        {[...Array(12)].map((_, i) => (
-          <Link href="/view" key={i} className="bg-gray-200 pt-5 px-5 pb-4">
-            <h3 className="text-xl font-bold">My Awesome Button</h3>
-            <p className="text-sm">Button</p>
-            <p className="text-sm mt-2">
-              This is the button description. I'm describing what the button is. or not.
-            </p>
-            <div className="flex items-center justify-between text-sm mt-2">
-              <p>@somerandomuser</p>
-              <div className="flex space-x-4">
-                <span className="flex items-center gap-1">
-                  <Heart className="h-3 w-3" /> 293
-                </span>
-                <span className="flex items-center gap-1">
-                  <Download className="h-3 w-3" /> 293
-                </span>
-              </div>
-            </div>
-          </Link>
+      {[...Array(12)].map((_, i) => (
+          <ComponentCard
+            key={i}
+            title="My Awesome Button"
+            type="Button"
+            description="This is the button description. I'm describing what the button is. or not."
+            username="@somerandomuser"
+            likes={293}
+            downloads={293}
+            href="/view"
+          />
         ))}
       </div>
 
