@@ -24,10 +24,20 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      # Step 4: Run Prettier
-      - name: Run Prettier
-        run: npx prettier --check .
+      # Step 4: Run Prettier with reviewdog
+      - name: Run Prettier with reviewdog
+        uses: reviewdog/action-prettier@v1
+        with:
+          level: warning
+          reporter: github-pr-review
+          filter_mode: nofilter
+          fail_on_error: true
+          prettier_flags: "--check ."
 
-      # Step 5: Run ESLint
-      - name: Run ESLint
-        run: npx eslint . --ext .js,.jsx,.ts,.tsx
+      # Step 5: Run ESLint with reviewdog
+      - name: Run ESLint with reviewdog
+        uses: reviewdog/action-eslint@v1
+        with:
+          level: error
+          reporter: github-pr-review
+          eslint_flags: ". --ext .js,.jsx,.ts,.tsx"
