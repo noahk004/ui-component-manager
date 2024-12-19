@@ -1,5 +1,6 @@
 import React from 'react'
 import { Heart, Download } from 'lucide-react'
+import ViewTag from '@/components/ViewTag'
 
 const ViewPage = () => {
   return (
@@ -73,9 +74,9 @@ export default function MyComponent() {
           <div className="flex flex-col pb-6 pl-4 border-b-2 border-black"> {/*maybe align pl of the divs*/}
             <p className="mt-2">Tags</p>
             <div className="flex flex-wrap gap-2 mt-2">
-              <div className="px-6 py-1 bg-gray-200 rounded-lg text-sm">Button</div>
-              <div className="px-6 py-1 bg-gray-200 rounded-lg text-sm">Modern</div>
-              <div className="px-6 py-1 bg-gray-200 rounded-lg text-sm">Tag</div>
+              <ViewTag label="Button" />
+              <ViewTag label="Modern" />
+              <ViewTag label="Tag" />
             </div>
           </div>
 

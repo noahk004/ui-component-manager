@@ -1,5 +1,6 @@
 import React from 'react'
 import { CheckCircle2, XCircle, Loader2 } from 'lucide-react'
+import UploadState from '@/components/UploadState'
 
 const Create = () => {
   return (
@@ -47,22 +48,7 @@ const Create = () => {
           <button className="px-6 py-2 bg-gray-200">Choose file</button>
         </div>
 
-        <div className="space-y-2">
-          <div className="flex items-center gap-2">
-            <CheckCircle2 className="w-5 h-5 text-green-500" />
-            <span>Module validation success</span>
-          </div>
-          
-          <div className="flex items-center gap-2">
-            <Loader2 className="w-5 h-5 text-yellow-500 animate-spin" />
-            <span>Checking your component...</span>
-          </div>
-          
-          <div className="flex items-center gap-2">
-            <XCircle className="w-5 h-5 text-red-500" />
-            <span>Module validation failed</span>
-          </div>
-        </div>
+        <UploadState state="loading" /> {/* states are success, loading, error */}
 
         <div>
           <p>Visibility</p>
