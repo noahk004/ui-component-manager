@@ -8,7 +8,9 @@ jobs:
   lint-and-format:
     name: Run Prettier and ESLint
     runs-on: ubuntu-latest
-
+    permissions:
+      pull-requests: write
+      contents: read
     steps:
       # Step 1: Check out the repository code
       - name: Check out code
