@@ -1,0 +1,33 @@
+name: Code Checks
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  lint-and-format:
+    name: Run Prettier and ESLint
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Check out the repository code
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      # Step 2: Set up Node.js
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x' # You can specify your preferred Node.js version
+
+      # Step 3: Install dependencies
+      - name: Install dependencies
+        run: npm install
+
+      # Step 4: Run Prettier
+      - name: Run Prettier
+        run: npx prettier --check .
+
+      # Step 5: Run ESLint
+      - name: Run ESLint
+        run: npx eslint . --ext .js,.jsx,.ts,.tsx
