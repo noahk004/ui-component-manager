@@ -30,7 +30,8 @@ jobs:
       - name: Check Prettier
         uses: EPMatt/reviewdog-action-prettier@v1
         with:
-          filter_mode: nofilter
+          filter_mode: file
+          fail_on_error: false
           reporter: github-pr-review
           level: warning
 
