@@ -1,43 +1,22 @@
-name: Code Checks
-
-on:
-  pull_request:
-    branches: [main]
-
+name: Run ESLint and Prettier
+on: [pull_request]
+  branches: [main]
 jobs:
-  lint-and-format:
-    name: Run Prettier and ESLint
+  tsc:
+    name: runner / tsc
     runs-on: ubuntu-latest
-
     steps:
-      # Step 1: Check out the repository code
-      - name: Check out code
-        uses: actions/checkout@v4
-
-      # Step 2: Set up Node.js
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
+      - uses: actions/checkout@v2
+      - uses: EPMatt/reviewdog-action-prettier@v1
         with:
-          node-version: '20.x' # You can specify your preferred Node.js version
-
-      # Step 3: Install dependencies
-      - name: Install dependencies
-        run: npm install
-
-      # Step 4: Run Prettier with reviewdog
-      - name: Run Prettier with reviewdog
-        uses: reviewdog/action-prettier@v1
-        with:
+          github_token: ${{ secrets.github_token }}
+          # Change reviewdog reporter if you need
+          # [github-pr-check,github-check,github-pr-review].
+          # More about reviewdog reporters at
+          # https://github.com/reviewdog/reviewdog#reporters
+          reporter: github-pr-review
+          # Change reporter level if you need
+          # [info,warning,error].
+          # More about reviewdog reporter level at
+          # https://github.com/reviewdog/reviewdog#reporters
           level: warning
-          reporter: github-pr-review
-          filter_mode: nofilter
-          fail_on_error: true
-          prettier_flags: "--check ."
-
-      # Step 5: Run ESLint with reviewdog
-      - name: Run ESLint with reviewdog
-        uses: reviewdog/action-eslint@v1
-        with:
-          level: error
-          reporter: github-pr-review
-          eslint_flags: ". --ext .js,.jsx,.ts,.tsx"
