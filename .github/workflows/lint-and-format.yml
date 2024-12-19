@@ -25,7 +25,7 @@ jobs:
         run: npm install
 
       # Step 4: Run Prettier with reviewdog
-      - uses: actions/checkout@v4
+      - name: Check Prettier
         uses: EPMatt/reviewdog-action-prettier@v1
         with:
           filter_mode: nofilter
@@ -35,7 +35,6 @@ jobs:
 
       # Step 5: Run ESLint with reviewdog
       - name: Run ESLint with reviewdog
-      - uses: actions/checkout@v4
         uses: reviewdog/action-eslint@v1
         with:
           level: error
