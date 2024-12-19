@@ -26,7 +26,7 @@ jobs:
 
       # Step 4: Run Prettier with reviewdog
       - uses: actions/checkout@v4
-      - uses: EPMatt/reviewdog-action-prettier@v1
+        uses: EPMatt/reviewdog-action-prettier@v1
         with:
           filter_mode: nofilter
           fail_on_error: true
@@ -36,7 +36,7 @@ jobs:
       # Step 5: Run ESLint with reviewdog
       - name: Run ESLint with reviewdog
       - uses: actions/checkout@v4
-      - uses: reviewdog/action-eslint@v1
+        uses: reviewdog/action-eslint@v1
         with:
           level: error
           reporter: github-pr-review
