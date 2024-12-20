@@ -43,9 +43,9 @@ jobs:
       # Step 6: Run ESLint with reviewdog
       - name: Run ESLint with reviewdog
         uses: reviewdog/action-eslint@v1
-        working-directory: apps/web
         with:
           filter_mode: nofilter
           level: error
           reporter: github-pr-review
+          working-directory: apps/web
           eslint_flags: "."
