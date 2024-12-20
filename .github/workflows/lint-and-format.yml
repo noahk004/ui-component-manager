@@ -47,4 +47,4 @@ jobs:
           filter_mode: nofilter
           level: error
           reporter: github-pr-review
-          eslint_flags: "apps/"
+          eslint_flags: "apps/api/ apps/web/"
