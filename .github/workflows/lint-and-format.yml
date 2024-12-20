@@ -44,8 +44,8 @@ jobs:
       - name: Run ESLint with reviewdog
         uses: reviewdog/action-eslint@v1
         with:
+          workdir: apps/web
           filter_mode: nofilter
           level: error
           reporter: github-pr-review
-          working-directory: apps/web
           eslint_flags: "."
