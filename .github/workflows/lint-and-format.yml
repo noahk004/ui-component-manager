@@ -24,7 +24,7 @@ jobs:
 
       # Step 3: Install dependencies
       - name: Install dependencies
-        run: npm install
+        run: pnpm install
 
       # Step 4: Run Prettier with reviewdog
       - name: Check Prettier
@@ -42,4 +42,4 @@ jobs:
           filter_mode: nofilter
           level: error
           reporter: github-pr-review
-          eslint_flags: "app/"
+          eslint_flags: "apps/"

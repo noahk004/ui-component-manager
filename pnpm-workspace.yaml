@@ -1,0 +1,5 @@
+# pnpm-workspace.yaml
+
+packages:
+  # Include all apps in the 'apps' directory
+  - 'apps/*'

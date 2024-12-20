@@ -1,10 +1,10 @@
-'use client'
+"use client";
 
-import React from 'react'
-import { X, Filter } from 'lucide-react'
-import ComponentCard from '@/components/ComponentCard'
-import FilterTag from '@/components/FilterTag'
-import SearchBar from '@/components/SearchBar'
+import React from "react";
+import { Filter } from "lucide-react";
+import ComponentCard from "@/src/components/ComponentCard";
+import FilterTag from "@/src/components/FilterTag";
+import SearchBar from "@/src/components/SearchBar";
 
 const Dashboard = () => {
   return (
@@ -14,13 +14,13 @@ const Dashboard = () => {
 
       <div className="flex items-center justify-between mt-3 pr-2">
         <div className="flex space-x-2">
-          <FilterTag 
-            label="Button" 
-            onRemove={() => console.log('Remove Button filter')} 
+          <FilterTag
+            label="Button"
+            onRemove={() => console.log("Remove Button filter")}
           />
-          <FilterTag 
-            label="Sleek" 
-            onRemove={() => console.log('Remove Sleek filter')} 
+          <FilterTag
+            label="Sleek"
+            onRemove={() => console.log("Remove Sleek filter")}
           />
         </div>
 
@@ -45,17 +45,16 @@ const Dashboard = () => {
           />
         ))}
       </div>
-      
+
       {/*TODO: add meaningful pagination*/}
       {/*TODO: figure out why pr-3 is needed for centering*/}
-      <div className="flex justify-center space-x-4 my-auto pr-3 w-full mt-6"> 
+      <div className="flex justify-center space-x-4 my-auto pr-3 w-full mt-6">
         <button>1</button>
         <button>2</button>
         <button>3</button>
       </div>
-
     </div>
-  )
-}
+  );
+};
 
-export default Dashboard
+export default Dashboard;
