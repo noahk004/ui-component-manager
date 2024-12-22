@@ -10,5 +10,7 @@ app.get("/", (req: Request, res: Response) => {
 });
 
 app.listen(PORT, () => {
-    console.log(`server on port ${PORT} good job for not crashing everything - justin`);
+    console.log(
+        `server on port ${PORT} good job for not crashing everything - justin`
+    );
 });
