@@ -7,4 +7,9 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// Add remaining schema here
+model Users {
+  id         String   @id @default(cuid())
+  username   String  
+  password   String  
+  createdAt DateTime @default(now())
+}
