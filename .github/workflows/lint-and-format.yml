@@ -36,8 +36,8 @@ jobs:
         with:
           workdir: .
           target: |
-            apps/api/src
-            apps/web/src
+            ./apps/api/src/**/*.*
+            ./apps/web/src/**/*.*
           filter_mode: file
           fail_on_error: false
           reporter: github-pr-review
