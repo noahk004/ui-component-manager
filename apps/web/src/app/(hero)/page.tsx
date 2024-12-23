@@ -12,6 +12,7 @@ const Hero = () => {
                 Log In
             </Link>
         </div>
-    );};
+    );
+};
 
 export default Hero;
