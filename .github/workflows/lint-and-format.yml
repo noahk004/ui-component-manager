@@ -38,7 +38,7 @@ jobs:
           target: |
             ./apps/api/src/**/*.*
             ./apps/web/src/**/*.*
-          filter_mode: file
+          filter_mode: nofilter
           fail_on_error: false
           reporter: github-pr-review
           level: warning
