@@ -49,3 +49,28 @@ jobs:
           level: error
           reporter: github-pr-review
           eslint_flags: "."
+
+  unit-tests:
+    name: Run Unit Tests for API
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20.x"
+
+      - name: Install pnpm
+        run: npm install -g pnpm
+
+      - name: Install dependencies
+        working-directory: .
+        run: pnpm install --filter ./apps/api
+
+      - name: Run Unit Tests
+        working-directory: apps/api
+        run: pnpm test
