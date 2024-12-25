@@ -4,11 +4,10 @@
     "description": "An online platform for users to share and download UI components made by the community.",
     "private": true,
     "scripts": {
-        "dev": "turbo run dev --filter web",
-        "build": "turbo run build --filter web",
-        "start": "turbo run start --filter web",
-        "lint": "turbo run lint",
-        "format": "turbo run format"
+        "dev": "turbo run dev --parallel --filter={./apps/*}",
+        "build": "turbo run build --parallel --filter={./apps/*}",
+        "start": "turbo run start --parallel --filter={./apps/*}",
+        "lint": "turbo run lint --parallel --filter={./apps/*}"
     },
     "devDependencies": {
         "eslint": "^9",
