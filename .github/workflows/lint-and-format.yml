@@ -72,4 +72,4 @@ jobs:
 
       - name: Run Unit Tests
         working-directory: apps/api
-        run: pnpm --filter apps/api test
+        run: pnpm test
