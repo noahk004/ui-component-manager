@@ -68,7 +68,8 @@ jobs:
         run: npm install -g pnpm
 
       - name: Install dependencies
-        run: pnpm install --filter apps/api...
+        working-directory: .
+        run: pnpm install --filter ./apps/api
 
       - name: Run Unit Tests
         working-directory: apps/api
