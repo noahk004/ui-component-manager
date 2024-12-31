@@ -1,5 +1,5 @@
+const cors = require("cors");
 import express, { Request, Response } from "express";
-import cors from "express";
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -7,8 +7,10 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
-app.get("/", (req: Request, res: Response) => {
-    res.send("this works yippee");
+app.post("/login", (req: Request, res: Response) => {
+    const jsonData = req.body;
+    console.log(jsonData);
+    res.status(200).send({ message: "this works yippee", data: jsonData });
 });
 
 app.listen(PORT, () => {
