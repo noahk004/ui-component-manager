@@ -13,6 +13,12 @@ app.post("/login", (req: Request, res: Response) => {
     res.status(200).send({ message: "this works yippee", data: jsonData });
 });
 
+app.post("/signup", async (req: Request, res: Response) => {
+    const { email, username, password } = req.body;
+    console.log(email, username, password);
+    res.status(200).send({ message: "this works yippee", data: req.body });
+});
+
 app.listen(PORT, () => {
     console.log(
         `server on port ${PORT} good job for not crashing everything - justin`
