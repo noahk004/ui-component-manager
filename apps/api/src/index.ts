@@ -4,6 +4,7 @@ import { PrismaClient } from "@prisma/client";
 import bcrypt from 'bcrypt';
 import dotenv from 'dotenv';
 import jwt from 'jsonwebtoken';
+import { authenticateToken } from './middleware/auth';
 
 dotenv.config();
 
