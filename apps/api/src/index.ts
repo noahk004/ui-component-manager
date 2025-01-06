@@ -14,17 +14,17 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
-const loginHandler: RequestHandler = async (req, res) => {
+const loginHandler: RequestHandler = async (req: Request, res: Response) => {
     try {
-        const { email, password } = req.body;
+        const { username, password } = req.body;
 
-        if (!email || !password) {
-            res.status(400).json({ error: 'Email and password are required' });
+        if (!username || !password) {
+            res.status(400).json({ error: 'Username and password are required' });
             return;
         }
 
         const user = await prisma.user.findUnique({
-            where: { email }
+            where: { username }
         });
 
         if (!user) {
@@ -40,7 +40,7 @@ const loginHandler: RequestHandler = async (req, res) => {
         }
 
         const token = jwt.sign(
-            { userId: user.id, email: user.email },
+            { userId: user.id, username: user.username },
             process.env.JWT_SECRET!,
             { expiresIn: '24h' }
         );
@@ -61,7 +61,7 @@ const loginHandler: RequestHandler = async (req, res) => {
     }
 };
 
-const signupHandler: RequestHandler = async (req, res) => {
+const signupHandler: RequestHandler = async (req: Request, res: Response) => {
     try {
         const { email, username, password } = req.body;
 
