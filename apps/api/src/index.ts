@@ -2,6 +2,10 @@ const cors = require("cors");
 import express, { Request, Response, RequestHandler } from "express";
 import { PrismaClient } from "@prisma/client";
 import bcrypt from 'bcrypt';
+import dotenv from 'dotenv';
+import jwt from 'jsonwebtoken';
+
+dotenv.config();
 
 const prisma = new PrismaClient();
 const app = express();
@@ -10,11 +14,52 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
-app.post("/login", (req: Request, res: Response) => {
-    const jsonData = req.body;
-    console.log(jsonData);
-    res.status(200).send({ message: "this works yippee", data: jsonData });
-});
+const loginHandler: RequestHandler = async (req, res) => {
+    try {
+        const { email, password } = req.body;
+
+        if (!email || !password) {
+            res.status(400).json({ error: 'Email and password are required' });
+            return;
+        }
+
+        const user = await prisma.user.findUnique({
+            where: { email }
+        });
+
+        if (!user) {
+            res.status(401).json({ error: 'Invalid credentials' });
+            return;
+        }
+
+        const isValidPassword = await bcrypt.compare(password, user.password);
+
+        if (!isValidPassword) {
+            res.status(401).json({ error: 'Invalid credentials' });
+            return;
+        }
+
+        const token = jwt.sign(
+            { userId: user.id, email: user.email },
+            process.env.JWT_SECRET!,
+            { expiresIn: '24h' }
+        );
+
+        res.json({
+            message: 'Login successful',
+            token,
+            user: {
+                id: user.id,
+                email: user.email,
+                username: user.username
+            }
+        });
+
+    } catch (error) {
+        console.error('Login error:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+};
 
 const signupHandler: RequestHandler = async (req, res) => {
     try {
@@ -70,6 +115,7 @@ const signupHandler: RequestHandler = async (req, res) => {
     }
 };
 
+app.post("/login", loginHandler);
 app.post("/signup", signupHandler);
 
 app.listen(PORT, () => {
