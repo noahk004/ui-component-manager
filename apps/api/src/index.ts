@@ -38,7 +38,7 @@ const loginHandler: RequestHandler = async (req: Request, res: Response) => {
         const isValidPassword = await bcrypt.compare(password, user.password);
 
         if (!isValidPassword) {
-            res.status(401).json({ error: 'Invalid credentials' });
+            res.status(401).json({ error: "Invalid credentials" });
             return;
         }
 
