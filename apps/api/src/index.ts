@@ -31,7 +31,7 @@ const loginHandler: RequestHandler = async (req: Request, res: Response) => {
         });
 
         if (!user) {
-            res.status(401).json({ error: 'Invalid credentials' });
+            res.status(401).json({ error: "Invalid credentials" });
             return;
         }
 
