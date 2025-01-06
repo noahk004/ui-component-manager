@@ -1,10 +1,10 @@
 const cors = require("cors");
 import express, { Request, Response, RequestHandler } from "express";
 import { PrismaClient } from "@prisma/client";
-import bcrypt from 'bcrypt';
-import dotenv from 'dotenv';
-import jwt from 'jsonwebtoken';
-import { authenticateToken } from './middleware/auth';
+import bcrypt from "bcrypt";
+import dotenv from "dotenv";
+import jwt from "jsonwebtoken";
+import { authenticateToken } from "./middleware/auth";
 
 dotenv.config();
 
