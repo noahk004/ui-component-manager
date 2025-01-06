@@ -2,17 +2,23 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from 'next/navigation';
 
 const Login = () => {
+    const router = useRouter();
+
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [error, setError] = useState("");
 
     const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
-        const body = {
-            "username": username,
-            "password": password,
-        };
+        setError("");
+
+        if (!username || !password) {
+            setError("All fields are required");
+            return;
+        }
 
         try {
             const response = await fetch("http://localhost:5000/login", {
@@ -20,11 +26,24 @@ const Login = () => {
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify(body),
+                body: JSON.stringify({ username, password }),
             });
-            console.log(response);
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                setError(data.error);
+                return;
+            }
+
+            localStorage.setItem('token', data.token);
+            localStorage.setItem('user', JSON.stringify(data.user));
+
+            router.push('/dashboard');
+
         } catch (error) {
-            console.error(error);
+            console.error('Error:', error);
+            setError('Failed to connect to server');
         }
     };
 
@@ -51,7 +70,6 @@ const Login = () => {
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                     />
-                    {/*TODO: add hrefs*/}
                     <Link
                         href="/signup"
                         className="text-sm mt-4 ml-2 underline"
@@ -76,8 +94,8 @@ const Login = () => {
                         >
                             Submit
                         </button>
-
                     </div>
+                    {error && <p className="text-red-500 text-sm mt-2 ml-auto mr-2">{error}</p>}
                 </div>
             </div>
         </div>

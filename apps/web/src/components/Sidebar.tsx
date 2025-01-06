@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
+import { useRouter } from 'next/navigation';
 
 const links = [
     { href: "/dashboard", label: "Browse" },
@@ -11,8 +12,17 @@ const links = [
     { href: "/create", label: "Create Component" },
 ];
 
+
 export default function Sidebar() {
     const pathname = usePathname();
+    const router = useRouter();
+
+    const handleLogout = () => {
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+        router.push('/login');
+    };
+    
     return (
         <div className="w-1/4 bg-gray-200 p-6 flex flex-col">
             <h1 className="text-3xl font-bold">Logo</h1>
@@ -33,12 +43,12 @@ export default function Sidebar() {
                 <div className="w-20 h-20 bg-blue-200 rounded-full" />
                 <div className="flex flex-col ml-2 py-4 text-sm">
                     <p className="underline">@USERNAME</p>
-                    <Link
-                        href="/login"
+                    <button
+                        onClick={handleLogout}
                         className="mt-auto underline font-semibold"
                     >
                         Log Out
-                    </Link>
+                    </button>
                 </div>
             </div>
         </div>

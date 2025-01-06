@@ -2,36 +2,63 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from 'next/navigation';
 
 const Signup = () => {
+    const router = useRouter();
+
     const [email, setEmail] = useState("");
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
+    const [error, setError] = useState("");
 
     const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
-        const body = {
-            email,
-            username,
-            password,
-        };
-        if (password !== confirmPassword) {
-            alert("passwords dont match >:("); //make this an error message maybe?
+        setError("");
+
+        if (!email || !username || !password || !confirmPassword) {
+            setError("all fields are required");
             return;
         }
+
+        if (password !== confirmPassword) {
+            setError("passwords don't match");
+            return;
+        }
+
+        if (password.length < 6) {
+            setError("password must be at least 6 characters long");
+            return;
+        }
+
         try {
             const response = await fetch("http://localhost:5000/signup", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify(body),
+                body: JSON.stringify({
+                    email,
+                    username,
+                    password,
+                }),
             });
-            console.log(response);
+    
+            const data = await response.json();
+    
+            if (!response.ok) {
+                setError(data.error);
+                return;
+            }
+    
+            router.push('/login');
+
         } catch (error) {
-            console.error(error);
+            console.error('error: ', error);
+            setError('Failed to connect to server');
         }
+        
     };
 
     return (
@@ -86,6 +113,11 @@ const Signup = () => {
                             Submit
                         </button>
                     </div>
+                    {error && (
+                        <div className="text-red-500 rounded relative mt-2 ml-auto">
+                        {error}
+                        </div>
+                    )}
                 </div>
             </div>
         </div>
