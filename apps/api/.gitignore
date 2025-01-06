@@ -1,0 +1,14 @@
+.env*
+
+# npm
+node_modules
+npm-shrinkwrap.json
+*.log
+*.gz
+
+# Coveralls
+.nyc_output
+coverage
+
+# Benchmarking
+benchmarks/graphs

@@ -1,0 +1,33 @@
+# Ignore all node_modules folders
+**/node_modules/
+
+# Ignore build output directories
+**/dist/
+**/build/
+
+# Ignore lock files
+pnpm-lock.yaml
+yarn.lock
+package-lock.json
+
+# Ignore environment files
+**/.env
+**/.env.*
+
+# Ignore public/static assets
+**/public/
+**/static/
+
+# Ignore Git-related files
+.git/
+.gitignore
+
+# Ignore configuration and workflow files
+.github/
+**/Dockerfile
+**/*.config.js
+**/*.config.ts
+
+# Allow only specific app directories
+!apps/api/src/
+!apps/web/src/

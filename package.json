@@ -1,29 +1,18 @@
 {
-  "name": "ui-component-manager",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
-  },
-  "dependencies": {
-    "clsx": "^2.1.1",
-    "lucide-react": "^0.468.0",
-    "next": "15.1.0",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0"
-  },
-  "devDependencies": {
-    "@eslint/eslintrc": "^3",
-    "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "eslint": "^9",
-    "eslint-config-next": "15.1.0",
-    "postcss": "^8",
-    "tailwindcss": "^3.4.1",
-    "typescript": "^5"
-  }
+    "name": "ui-component-manager",
+    "version": "1.0.0",
+    "description": "An online platform for users to share and download UI components made by the community.",
+    "private": true,
+    "scripts": {
+        "dev": "turbo run dev --parallel --filter={./apps/*}",
+        "build": "turbo run build --parallel --filter={./apps/*}",
+        "start": "turbo run start --parallel --filter={./apps/*}",
+        "lint": "turbo run lint --parallel --filter={./apps/*}"
+    },
+    "devDependencies": {
+        "eslint": "^9",
+        "prettier": "^3.4.2",
+        "turbo": "^2.3.3"
+    },
+    "packageManager": "pnpm@9.12.2"
 }
