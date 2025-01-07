@@ -10,7 +10,7 @@ const Hero = () => {
 
     const handleClick = () => {
         if (isAuthenticated()) {
-            router.push('/dashboard');
+            router.push("/dashboard");
         } else {
             router.push('/login');
         }
