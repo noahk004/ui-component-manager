@@ -2,8 +2,8 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { useRouter } from 'next/navigation';
-import { isAuthenticated } from '../../../utils/auth';
+import { useRouter } from "next/navigation";
+import { isAuthenticated } from "../../../utils/auth";
 
 const Signup = () => {
     const router = useRouter();
