@@ -45,7 +45,7 @@ const loginHandler: RequestHandler = async (req: Request, res: Response) => {
         const token = jwt.sign(
             { userId: user.id, username: user.username },
             process.env.JWT_SECRET!,
-            { expiresIn: '24h' }
+            { expiresIn: "24h" }
         );
 
         res.json({
