@@ -7,7 +7,7 @@
         "strict": true,
         "esModuleInterop": true,
         "skipLibCheck": true,
-        "baseUrl": ".", // Base directory for resolving non-relative imports
+        "baseUrl": "." // Base directory for resolving non-relative imports
     },
     "include": ["src", "lib", "__tests__"],
     "exclude": ["node_modules", "dist"]
