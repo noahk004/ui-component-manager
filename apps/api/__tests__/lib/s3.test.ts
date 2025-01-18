@@ -2,7 +2,7 @@ import { getOne, uploadOne, deleteOne } from "../../lib/s3";
 
 test("getOnePresigned does not return null", async () => {
     let url = null;
-    url = await getOne("dev/code-modules/users/001/001/Button.tsx");
+    url = await getOne("dev/profile-images/users/1877385915/1-intro-photo-final.jpg");
     console.log(url);
 
     expect(url).not.toBe(null);
