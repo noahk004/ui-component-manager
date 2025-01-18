@@ -1,13 +1,127 @@
-import express, { Request, Response } from "express";
+const cors = require("cors");
+import express, { Request, Response, RequestHandler } from "express";
+import { PrismaClient } from "@prisma/client";
+import bcrypt from "bcrypt";
+import dotenv from "dotenv";
+import jwt from "jsonwebtoken";
+import cookieParser from 'cookie-parser';
 
+dotenv.config();
+
+const prisma = new PrismaClient();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+app.use(cors());
 app.use(express.json());
+app.use(cookieParser());
 
-app.get("/", (req: Request, res: Response) => {
-    res.send("this works yippee");
-});
+const loginHandler: RequestHandler = async (req: Request, res: Response) => {
+    try {
+        const { username, password } = req.body;
+
+        if (!username || !password) {
+            res.status(400).json({
+                error: "Username and password are required",
+            });
+            return;
+        }
+
+        const user = await prisma.user.findUnique({
+            where: { username }
+        });
+
+        if (!user) {
+            res.status(401).json({ error: "Invalid credentials" });
+            return;
+        }
+
+        const isValidPassword = await bcrypt.compare(password, user.password);
+
+        if (!isValidPassword) {
+            res.status(401).json({ error: "Invalid credentials" });
+            return;
+        }
+
+        const token = jwt.sign(
+            { userId: user.id, username: user.username },
+            process.env.JWT_SECRET!,
+            { expiresIn: "24h" }
+        );
+
+        res.cookie('token', token, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: 'none',
+            maxAge: 24 * 60 * 60 * 1000
+        });
+
+        res.json({
+            message: 'Login successful'
+        });
+
+    } catch (error) {
+        console.error('Login error:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+};
+
+const signupHandler: RequestHandler = async (req: Request, res: Response) => {
+    try {
+        const { email, username, password } = req.body;
+
+        if (!email || !username || !password) {
+            res.status(400).json({ error: 'All fields are required' });
+            return;
+        }
+
+        const existingUser = await prisma.user.findFirst({
+            where: {
+                OR: [
+                    { email },
+                    { username }
+                ]
+            }
+        });
+
+        if (existingUser) {
+            res.status(400).json({ 
+                error: existingUser.email === email 
+                    ? 'Email already in use' 
+                    : 'Username already taken' 
+            });
+            return;
+        }
+
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(password, salt);
+
+        const user = await prisma.user.create({
+            data: {
+                email,
+                username,
+                password: hashedPassword,
+                salt
+            }
+        });
+
+        res.status(201).json({
+            message: 'User created successfully',
+            user: {
+                id: user.id,
+                username: user.username,
+                email: user.email
+            }
+        });
+
+    } catch (error) {
+        console.error('Signup error:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+};
+
+app.post("/login", loginHandler);
+app.post("/signup", signupHandler);
 
 app.listen(PORT, () => {
     console.log(
