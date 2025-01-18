@@ -57,12 +57,7 @@ const loginHandler: RequestHandler = async (req: Request, res: Response) => {
         });
 
         res.json({
-            message: 'Login successful',
-            user: {
-                id: user.id,
-                email: user.email,
-                username: user.username
-            }
+            message: 'Login successful'
         });
 
     } catch (error) {
