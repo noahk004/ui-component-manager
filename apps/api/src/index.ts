@@ -4,7 +4,7 @@ import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcrypt";
 import dotenv from "dotenv";
 import jwt from "jsonwebtoken";
-import { authenticateToken } from "./middleware/auth";
+import cookieParser from 'cookie-parser';
 
 dotenv.config();
 
@@ -14,6 +14,7 @@ const PORT = process.env.PORT || 5000;
 
 app.use(cors());
 app.use(express.json());
+app.use(cookieParser());
 
 const loginHandler: RequestHandler = async (req: Request, res: Response) => {
     try {
@@ -48,9 +49,15 @@ const loginHandler: RequestHandler = async (req: Request, res: Response) => {
             { expiresIn: "24h" }
         );
 
+        res.cookie('token', token, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: 'none',
+            maxAge: 24 * 60 * 60 * 1000
+        });
+
         res.json({
             message: 'Login successful',
-            token,
             user: {
                 id: user.id,
                 email: user.email,

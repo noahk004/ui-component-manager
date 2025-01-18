@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction } from 'express';
+import { Request, Response, NextFunction, RequestHandler } from 'express';
 import jwt from 'jsonwebtoken';
 
 interface AuthRequest extends Request {
@@ -8,22 +8,23 @@ interface AuthRequest extends Request {
     };
 }
 
-export const authenticateToken = (req: AuthRequest, res: Response, next: NextFunction) => {
-    const authHeader = req.headers['authorization'];
-    const token = authHeader && authHeader.split(' ')[1];
+interface JwtPayload {
+    userId: string;
+    username: string;
+}
 
+export const authenticateToken: RequestHandler = (req: AuthRequest, res: Response, next: NextFunction) => {
+    const token = req.cookies.token;
+    
     if (!token) {
-        return res.status(401).json({ error: 'Access denied. No token provided.' });
+        return res.status(401).json({ error: 'Authentication required' });
     }
 
     try {
-        const decoded = jwt.verify(token, process.env.JWT_SECRET!) as {
-            userId: string;
-            username: string;
-        };
-        req.user = decoded;
+        const user = jwt.verify(token, process.env.JWT_SECRET!) as JwtPayload;
+        req.user = user;
         next();
     } catch (error) {
-        res.status(401).json({ error: 'Invalid token' });
+        return res.status(403).json({ error: 'Invalid token' });
     }
 };
