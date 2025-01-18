@@ -25,7 +25,8 @@ model User {
 model Component {
   id            Int       @id @default(autoincrement())
   title         String
-  description   String
+  alias         String    @unique
+  description   String?
   codeSource    String
   isPrivate     Boolean
   createdAt     DateTime  @default(now())

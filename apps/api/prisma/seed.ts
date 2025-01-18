@@ -42,6 +42,7 @@ async function main() {
         data: {
             id: component1id,
             title: "React Button",
+            alias: "rbutton",
             description: "A reusable React button component.",
             codeSource: `dev/code-modules/users/${user1.username}/${component1id}/Button.tsx`,
             isPrivate: false,
@@ -57,6 +58,7 @@ async function main() {
         data: {
             id: component2id,
             title: "React Modal",
+            alias: "rmodal",
             description: "A simple modal using React.",
             codeSource: `dev/code-modules/users/${user2.username}/${component2id}/Button.tsx`,
             isPrivate: false,
