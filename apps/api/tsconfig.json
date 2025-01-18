@@ -2,12 +2,13 @@
     "compilerOptions": {
         "target": "ES2017",
         "module": "commonjs",
-        "rootDir": "src",
+        "rootDir": ".",
         "outDir": "dist",
         "strict": true,
         "esModuleInterop": true,
-        "skipLibCheck": true
+        "skipLibCheck": true,
+        "baseUrl": "." // Base directory for resolving non-relative imports
     },
-    "include": ["src"],
-    "exclude": ["node_modules"]
+    "include": ["src", "lib", "__tests__"],
+    "exclude": ["node_modules", "dist"]
 }
