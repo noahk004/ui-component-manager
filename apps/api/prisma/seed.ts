@@ -1,19 +1,27 @@
 import { PrismaClient } from "@prisma/client";
+
+import bcrypt from "bcrypt";
+
 const prisma = new PrismaClient();
 
 async function main() {
     // Create Tags
-    const tag1 = await prisma.tag.create({ data: { name: "JavaScript" } });
-    const tag2 = await prisma.tag.create({ data: { name: "React" } });
-    const tag3 = await prisma.tag.create({ data: { name: "CSS" } });
+    const tag1 = await prisma.tag.create({ data: { name: "Button" } });
+    const tag2 = await prisma.tag.create({ data: { name: "Sleek" } });
+    const tag3 = await prisma.tag.create({ data: { name: "Modal" } });
+
+    const salt1 = await bcrypt.genSalt(10);
+    const salt2 = await bcrypt.genSalt(10);
+    const hash1 = await bcrypt.hash("password", salt1);
+    const hash2 = await bcrypt.hash("password", salt2);
 
     // Create Users
     const user1 = await prisma.user.create({
         data: {
             username: "user1",
             email: "user1@example.com",
-            password: "hashedpassword1",
-            salt: "salt1",
+            password: hash1,
+            salt: salt1,
             profileImage: null,
         },
     });
@@ -22,19 +30,20 @@ async function main() {
         data: {
             username: "user2",
             email: "user2@example.com",
-            password: "hashedpassword2",
-            salt: "salt2",
+            password: hash2,
+            salt: salt2,
             profileImage: null,
         },
     });
 
     // Create Components
+    const component1id = 1;
     const component1 = await prisma.component.create({
         data: {
+            id: component1id,
             title: "React Button",
             description: "A reusable React button component.",
-            type: "UI",
-            codeSource: "<button>Click Me</button>",
+            codeSource: `dev/code-modules/users/${user1.username}/${component1id}/Button.tsx`,
             isPrivate: false,
             userId: user1.id,
             componentTags: {
@@ -43,16 +52,17 @@ async function main() {
         },
     });
 
+    const component2id = 2;
     const component2 = await prisma.component.create({
         data: {
-            title: "CSS Grid",
-            description: "A template for a CSS grid layout.",
-            type: "Layout",
-            codeSource: ".grid { display: grid; }",
+            id: component2id,
+            title: "React Modal",
+            description: "A simple modal using React.",
+            codeSource: `dev/code-modules/users/${user2.username}/${component2id}/Button.tsx`,
             isPrivate: false,
             userId: user2.id,
             componentTags: {
-                create: [{ tagId: tag3.id }],
+                create: [{ tagId: tag2.id }, { tagId: tag3.id }],
             },
         },
     });
