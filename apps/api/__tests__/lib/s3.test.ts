@@ -1,4 +1,4 @@
-import { getOne, uploadOne, deleteOne } from "../../lib/s3";
+import { getOne, uploadOne, deleteOne } from "../../src/lib/s3";
 
 test("getOnePresigned does not return null", async () => {
     let url = null;

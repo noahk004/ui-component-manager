@@ -9,6 +9,6 @@
         "skipLibCheck": true,
         "baseUrl": "." // Base directory for resolving non-relative imports
     },
-    "include": ["src", "lib", "__tests__"],
+    "include": ["src", "src/lib", "__tests__"],
     "exclude": ["node_modules", "dist"]
 }
