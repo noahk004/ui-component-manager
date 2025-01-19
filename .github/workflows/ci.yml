@@ -71,6 +71,10 @@ jobs:
         working-directory: .
         run: pnpm install --filter ./apps/api
 
+      - name: Generate Prisma Client
+        working-directory: apps/api
+        run: npx prisma generate
+
       - name: Run Unit Tests
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
