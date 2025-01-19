@@ -4,7 +4,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 
-import { authRouter } from "./routes";
+import { authRouter, publicRouter, protectedRouter } from "./routes";
 
 dotenv.config();
 
@@ -15,5 +15,6 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use("/api/auth", authRouter);
+app.use("/api/components", publicRouter);
 
 export { app };
