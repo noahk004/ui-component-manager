@@ -1,10 +1,11 @@
 import request from "supertest";
 import { app } from "../../src/app";
-import { fetchComponentWithRelations } from "../../src/lib/data"; 
+import { fetchComponentWithRelations } from "../../src/lib/data";
 
 jest.mock("../../src/lib/data"); // Mock the fetch function
 
-const mockFetchComponentWithRelations = fetchComponentWithRelations as jest.Mock;
+const mockFetchComponentWithRelations =
+    fetchComponentWithRelations as jest.Mock;
 
 describe("GET /api/components/:id", () => {
     afterEach(() => {
