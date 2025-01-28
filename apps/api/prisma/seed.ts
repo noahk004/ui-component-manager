@@ -5,6 +5,13 @@ import bcrypt from "bcrypt";
 const prisma = new PrismaClient();
 
 async function main() {
+    await prisma.download.deleteMany({});
+    await prisma.like.deleteMany({});
+    await prisma.componentTag.deleteMany({});
+    await prisma.component.deleteMany({});
+    await prisma.tag.deleteMany({});
+    await prisma.user.deleteMany({});
+
     // Create Tags
     const tag1 = await prisma.tag.create({ data: { name: "Button" } });
     const tag2 = await prisma.tag.create({ data: { name: "Sleek" } });
