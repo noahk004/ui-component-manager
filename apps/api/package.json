@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node dist/index.js",
     "build": "tsc",
-    "dev": "nodemon src/index.ts",
+    "dev": "npx prisma generate && npx prisma db seed && concurrently \"nodemon src/index.ts\" \"npx prisma studio\"",
     "test": "jest --coverage --detectOpenHandles"
   },
   "dependencies": {
@@ -28,6 +28,7 @@
     "@types/jest": "^29.5.14",
     "@types/node": "^20",
     "@types/supertest": "^6.0.2",
+    "concurrently": "^9.1.2",
     "jest": "^29.7.0",
     "nodemon": "^3.1.0",
     "prisma": "^5.10.2",
