@@ -13,11 +13,12 @@ interface JwtPayload {
     username: string;
 }
 
-export const authenticateToken: RequestHandler = (req: AuthRequest, res: Response, next: NextFunction) => {
+export const requireAuth: RequestHandler = (req: AuthRequest, res: Response, next: NextFunction): void => {
     const token = req.cookies.token;
     
     if (!token) {
-        return res.status(401).json({ error: 'Authentication required' });
+        res.status(401).json({ error: 'Authentication required' });
+        return
     }
 
     try {
@@ -25,6 +26,7 @@ export const authenticateToken: RequestHandler = (req: AuthRequest, res: Respons
         req.user = user;
         next();
     } catch (error) {
-        return res.status(403).json({ error: 'Invalid token' });
+        res.status(403).json({ error: 'Invalid token' });
+        return
     }
 };

@@ -110,3 +110,18 @@ export const deleteOne = async (key: string): Promise<void> => {
         throw error;
     }
 };
+
+export function getS3Path(...args: string[]): string {
+    let result = "";
+    if (process.env.ENVIRONMENT === "DEVELOPMENT") {
+        result += "dev";
+    } else {
+        result += "prod";
+    }
+
+    for (let a of args) {
+        result += `/${a}`;
+    }
+
+    return result;
+}

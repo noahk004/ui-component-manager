@@ -1,11 +1,55 @@
 import request from "supertest";
 import { app } from "../../src/app";
-import { fetchComponentWithRelations } from "../../src/lib/data";
+import { fetchComponents, fetchComponentById } from "../../src/lib/data";
 
 jest.mock("../../src/lib/data"); // Mock the fetch function
 
-const mockFetchComponentWithRelations =
-    fetchComponentWithRelations as jest.Mock;
+const mockFetchComponents = fetchComponents as jest.Mock;
+
+const mockFetchComponentById = fetchComponentById as jest.Mock;
+
+describe("GET /api/components", () => {
+    afterEach(() => {
+        jest.clearAllMocks();
+    });
+
+    it("returns 200 and a list of components", async () => {
+        const mockComponents = [
+            {
+                id: 1,
+                title: "Component 1",
+                likes: [],
+                downloads: [],
+                componentTags: [],
+                user: { id: 1, username: "testuser1" },
+            },
+            {
+                id: 2,
+                title: "Component 2",
+                likes: [],
+                downloads: [],
+                componentTags: [],
+                user: { id: 2, username: "testuser2" },
+            },
+        ];
+
+        mockFetchComponents.mockResolvedValue(mockComponents);
+
+        const response = await request(app).get("/api/components");
+        expect(response.status).toBe(200);
+        expect(response.body).toEqual(mockComponents);
+    });
+
+    it("returns 500 on server error", async () => {
+        mockFetchComponents.mockImplementation(() => {
+            throw new Error("Database error");
+        });
+
+        const response = await request(app).get("/api/components");
+        expect(response.status).toBe(500);
+        expect(response.body).toEqual({ error: "Internal server error" });
+    });
+});
 
 describe("GET /api/components/:id", () => {
     afterEach(() => {
@@ -19,7 +63,7 @@ describe("GET /api/components/:id", () => {
     });
 
     it("returns 404 if the component is not found", async () => {
-        mockFetchComponentWithRelations.mockResolvedValue(null);
+        mockFetchComponentById.mockResolvedValue(null);
 
         const response = await request(app).get("/api/components/999");
         expect(response.status).toBe(404);
@@ -36,7 +80,7 @@ describe("GET /api/components/:id", () => {
             user: { id: 1, username: "testuser" },
         };
 
-        mockFetchComponentWithRelations.mockResolvedValue(mockComponent);
+        mockFetchComponentById.mockResolvedValue(mockComponent);
 
         const response = await request(app).get("/api/components/1");
         expect(response.status).toBe(200);
@@ -44,7 +88,7 @@ describe("GET /api/components/:id", () => {
     });
 
     it("returns 500 on server error", async () => {
-        mockFetchComponentWithRelations.mockImplementation(() => {
+        mockFetchComponentById.mockImplementation(() => {
             throw new Error("Database error");
         });
 
