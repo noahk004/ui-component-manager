@@ -4,6 +4,52 @@ import { fetchComponents, fetchComponentById } from "../lib/data";
 
 const publicRouter = Router();
 
+/**
+ * @swagger
+ * /:
+ *   get:
+ *     summary: Retrieve all public components
+ *     tags: [Components]
+ *     description: Fetches a list of all public components from the database.
+ *     responses:
+ *       200:
+ *         description: A list of components.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   id:
+ *                     type: integer
+ *                     example: 1
+ *                   title:
+ *                     type: string
+ *                     example: "My Component"
+ *                   alias:
+ *                     type: string
+ *                     example: "my-component"
+ *                   description:
+ *                     type: string
+ *                     example: "A public UI component"
+ *                   isPrivate:
+ *                     type: boolean
+ *                     example: false
+ *                   userId:
+ *                     type: string
+ *                     example: "123456"
+ *       500:
+ *         description: Internal server error.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: "Internal server error"
+ */
 publicRouter.get("/", async (req: Request, res: Response) => {
     try {
         const components = await fetchComponents(prisma);
@@ -15,6 +61,77 @@ publicRouter.get("/", async (req: Request, res: Response) => {
     }
 });
 
+/**
+ * @swagger
+ * /{id}:
+ *   get:
+ *     summary: Retrieve a component by ID
+ *     tags: [Components]
+ *     description: Fetches a single component by its ID.
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: The ID of the component to retrieve
+ *     responses:
+ *       200:
+ *         description: The requested component.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 id:
+ *                   type: integer
+ *                   example: 1
+ *                 title:
+ *                   type: string
+ *                   example: "My Component"
+ *                 alias:
+ *                   type: string
+ *                   example: "my-component"
+ *                 description:
+ *                   type: string
+ *                   example: "A public UI component"
+ *                 isPrivate:
+ *                   type: boolean
+ *                   example: false
+ *                 userId:
+ *                   type: string
+ *                   example: "123456"
+ *       400:
+ *         description: Invalid component ID.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: "Invalid component ID"
+ *       404:
+ *         description: Component not found.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: "Component not found"
+ *       500:
+ *         description: Internal server error.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: "Internal server error"
+ */
 publicRouter.get("/:id", async (req: Request, res: Response) => {
     try {
         const componentId = parseInt(req.params.id, 10); // Convert the ID to a number
