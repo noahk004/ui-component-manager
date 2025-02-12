@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node dist/index.js",
     "build": "tsc",
-    "dev": "npx prisma migrate dev && npx prisma db seed && concurrently \"nodemon src/index.ts\" \"npx prisma studio\"",
+    "dev": "npx prisma migrate dev && npx prisma db seed && concurrently \"nodemon src/index.ts\" \"npx prisma studio\" \"start http://localhost:5000/api-docs\"",
     "test": "jest --coverage --detectOpenHandles"
   },
   "dependencies": {
@@ -17,13 +17,17 @@
     "@types/cors": "^2.8.17",
     "@types/jsonwebtoken": "^9.0.7",
     "@types/multer": "^1.4.12",
+    "@types/swagger-jsdoc": "^6.0.4",
+    "@types/swagger-ui-express": "^4.1.7",
     "bcrypt": "^5.1.1",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.18.3",
     "jsonwebtoken": "^9.0.2",
-    "multer": "1.4.5-lts.1"
+    "multer": "1.4.5-lts.1",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1"
   },
   "devDependencies": {
     "@types/express": "^5.0.0",
