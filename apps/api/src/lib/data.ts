@@ -113,7 +113,7 @@ export async function createComponent(
 
 export async function deleteComponent(
     prisma: PrismaClient,
-    component: Component,
+    component: Component
 ) {
     await deleteOne(component.codeSource);
 

@@ -1,5 +1,5 @@
-import { Request, Response, NextFunction, RequestHandler } from 'express';
-import jwt from 'jsonwebtoken';
+import { Request, Response, NextFunction, RequestHandler } from "express";
+import jwt from "jsonwebtoken";
 
 interface AuthRequest extends Request {
     user?: {
@@ -13,12 +13,16 @@ interface JwtPayload {
     username: string;
 }
 
-export const requireAuth: RequestHandler = (req: AuthRequest, res: Response, next: NextFunction): void => {
+export const requireAuth: RequestHandler = (
+    req: AuthRequest,
+    res: Response,
+    next: NextFunction
+): void => {
     const token = req.cookies.token;
-    
+
     if (!token) {
-        res.status(401).json({ error: 'Authentication required' });
-        return
+        res.status(401).json({ error: "Authentication required" });
+        return;
     }
 
     try {
@@ -26,7 +30,7 @@ export const requireAuth: RequestHandler = (req: AuthRequest, res: Response, nex
         req.user = user;
         next();
     } catch (error) {
-        res.status(403).json({ error: 'Invalid token' });
-        return
+        res.status(403).json({ error: "Invalid token" });
+        return;
     }
 };

@@ -68,7 +68,7 @@ protectedRouter.delete("/:id", async (req: Request, res: Response) => {
         }
 
         if (decoded.userId !== component.userId) {
-            res.status(403).json({ error: "Unauthorized user" })
+            res.status(403).json({ error: "Unauthorized user" });
             return;
         }
 

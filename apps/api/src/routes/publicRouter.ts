@@ -6,7 +6,7 @@ const publicRouter = Router();
 
 publicRouter.get("/", async (req: Request, res: Response) => {
     try {
-        const components = await fetchComponents(prisma)
+        const components = await fetchComponents(prisma);
 
         res.status(200).json(components);
     } catch (error) {
@@ -23,10 +23,7 @@ publicRouter.get("/:id", async (req: Request, res: Response) => {
             return;
         }
 
-        const component = await fetchComponentById(
-            prisma,
-            componentId
-        );
+        const component = await fetchComponentById(prisma, componentId);
 
         if (!component) {
             res.status(404).json({ error: "Component not found" });
