@@ -1,6 +1,6 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient, Component } from "@prisma/client";
 
-import { uploadOne, getS3Path } from "./s3";
+import { uploadOne, deleteOne, getS3Path } from "./s3";
 
 export async function fetchComponents(prisma: PrismaClient) {
     const components = await prisma.component.findMany();
@@ -51,7 +51,7 @@ export async function createComponent(
 
     // Check if there are duplicate tags
     if (new Set(tagIds).size !== tagIds.length) {
-        throw new Error("Duplicate tags in tagIds.")
+        throw new Error("Duplicate tags in tagIds.");
     }
 
     try {
@@ -109,4 +109,15 @@ export async function createComponent(
 
         throw error;
     }
+}
+
+export async function deleteComponent(
+    prisma: PrismaClient,
+    component: Component,
+) {
+    await deleteOne(component.codeSource);
+
+    await prisma.component.deleteMany({
+        where: { id: component.id },
+    });
 }

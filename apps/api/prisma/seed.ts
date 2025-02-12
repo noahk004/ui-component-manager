@@ -47,7 +47,6 @@ async function main() {
     const component1id = 1;
     const component1 = await prisma.component.create({
         data: {
-            id: component1id,
             title: "React Button",
             alias: "rbutton",
             description: "A reusable React button component.",
@@ -63,7 +62,6 @@ async function main() {
     const component2id = 2;
     const component2 = await prisma.component.create({
         data: {
-            id: component2id,
             title: "React Modal",
             alias: "rmodal",
             description: "A simple modal using React.",
