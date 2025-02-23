@@ -63,7 +63,7 @@ model Download {
 
 model Tag {
   id            Int       @id @default(autoincrement())
-  name          String
+  name          String    @unique
 
   componentTags ComponentTag[]
 }

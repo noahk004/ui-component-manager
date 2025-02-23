@@ -14,7 +14,7 @@ const protectedRouter = Router();
 
 /**
  * @swagger
- * /:
+ * /api/components:
  *   post:
  *     summary: Upload a file and create a component
  *     tags: [Components]
@@ -137,7 +137,7 @@ protectedRouter.post(
 
 /**
  * @swagger
- * /{id}:
+ * /api/components/{id}:
  *   delete:
  *     summary: Delete a component by ID
  *     tags: [Components]

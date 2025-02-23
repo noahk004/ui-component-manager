@@ -7,7 +7,7 @@ const authRouter = Router();
 
 /**
  * @swagger
- * /login:
+ * /api/auth/login:
  *   post:
  *     summary: Authenticate a user and generate a JWT token
  *     tags: [Auth]
@@ -105,7 +105,7 @@ authRouter.post("/login", async (req: Request, res: Response) => {
 
         res.cookie("token", token, {
             httpOnly: true,
-            secure: process.env.ENVIRONMENT === "PRODUCTION",
+            secure: true,
             sameSite: "none",
             maxAge: 24 * 60 * 60 * 1000,
         });
@@ -121,7 +121,7 @@ authRouter.post("/login", async (req: Request, res: Response) => {
 
 /**
  * @swagger
- * /signup:
+ * /api/auth/signup:
  *   post:
  *     summary: Register a new user
  *     tags: [Auth]
@@ -196,7 +196,7 @@ authRouter.post("/signup", async (req: Request, res: Response) => {
         const { email, username, password } = req.body;
 
         if (!email || !username || !password) {
-            res.status(400).json({ error: "All fields are required" });
+            res.status(400).json({ error: "All fields are required." });
             return;
         }
 
@@ -210,7 +210,7 @@ authRouter.post("/signup", async (req: Request, res: Response) => {
             res.status(400).json({
                 error:
                     existingUser.email === email
-                        ? "Email already in use"
+                        ? "Email or username already in use."
                         : "Username already taken",
             });
             return;
@@ -229,7 +229,7 @@ authRouter.post("/signup", async (req: Request, res: Response) => {
         });
 
         res.status(201).json({
-            message: "User created successfully",
+            message: "User created successfully.",
             user: {
                 id: user.id,
                 username: user.username,
@@ -238,7 +238,7 @@ authRouter.post("/signup", async (req: Request, res: Response) => {
         });
     } catch (error) {
         console.error("Signup error:", error);
-        res.status(500).json({ error: "Internal server error" });
+        res.status(500).json({ error: "Internal server error." });
     }
 });
 
