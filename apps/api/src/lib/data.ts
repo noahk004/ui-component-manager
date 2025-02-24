@@ -136,7 +136,7 @@ export async function fetchComponents(
                               componentTags: {
                                   some: {
                                       tag: {
-                                          name: tagName, 
+                                          name: tagName,
                                       },
                                   },
                               },

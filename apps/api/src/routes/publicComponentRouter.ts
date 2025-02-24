@@ -10,7 +10,7 @@ const publicComponentRouter = Router();
  *   get:
  *     summary: Fetch paginated components with optional search and tag filtering
  *     description: Retrieves a paginated list of components, optionally filtered by a search term and/or tags.
- *     tags: 
+ *     tags:
  *       - Components
  *     parameters:
  *       - in: query
@@ -114,9 +114,17 @@ publicComponentRouter.get("/", async (req: Request, res: Response) => {
             : undefined;
 
         const page = req.query.page ? parseInt(req.query.page as string) : 1;
-        const limit = req.query.limit ? parseInt(req.query.limit as string) : 10;
+        const limit = req.query.limit
+            ? parseInt(req.query.limit as string)
+            : 10;
 
-        const componentData = await fetchComponents(prisma, search, tags, page, limit);
+        const componentData = await fetchComponents(
+            prisma,
+            search,
+            tags,
+            page,
+            limit
+        );
 
         res.status(200).json(componentData);
     } catch (error) {

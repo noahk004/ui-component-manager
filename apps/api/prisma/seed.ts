@@ -47,7 +47,10 @@ async function main() {
     const components = await Promise.all(
         Array.from({ length: 200 }, async (_, i) => {
             const user = users[i % users.length]; // Assign components to different users
-            const selectedTags = [tags[i % tags.length], tags[(i + 1) % tags.length]];
+            const selectedTags = [
+                tags[i % tags.length],
+                tags[(i + 1) % tags.length],
+            ];
             return prisma.component.create({
                 data: {
                     title: `Component ${i + 1}`,
@@ -68,7 +71,8 @@ async function main() {
     await Promise.all(
         Array.from({ length: 100 }, async () => {
             const user = users[Math.floor(Math.random() * users.length)];
-            const component = components[Math.floor(Math.random() * components.length)];
+            const component =
+                components[Math.floor(Math.random() * components.length)];
             return prisma.like.create({
                 data: {
                     userId: user.id,
@@ -82,7 +86,8 @@ async function main() {
     await Promise.all(
         Array.from({ length: 100 }, async () => {
             const user = users[Math.floor(Math.random() * users.length)];
-            const component = components[Math.floor(Math.random() * components.length)];
+            const component =
+                components[Math.floor(Math.random() * components.length)];
             return prisma.download.create({
                 data: {
                     userId: user.id,

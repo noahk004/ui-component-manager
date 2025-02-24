@@ -8,7 +8,12 @@ import swaggerDocs from "../swagger";
 
 import { requireAuth } from "./middleware/auth";
 
-import { authRouter, publicComponentRouter, protectedRouter, tagRouter } from "./routes";
+import {
+    authRouter,
+    publicComponentRouter,
+    protectedRouter,
+    tagRouter,
+} from "./routes";
 
 dotenv.config();
 
@@ -30,7 +35,7 @@ app.use(cookieParser());
 
 // Publicly accessible api routes
 app.use("/api/auth", authRouter);
-app.use("/api/tags", tagRouter)
+app.use("/api/tags", tagRouter);
 app.use("/api/components", publicComponentRouter);
 
 // Require authentication for below routes
