@@ -182,7 +182,7 @@ publicComponentRouter.get("/", async (req: Request, res: Response) => {
  *               properties:
  *                 error:
  *                   type: string
- *                   example: "Invalid component ID"
+ *                   example: "Invalid component ID."
  *       404:
  *         description: Component not found.
  *         content:
@@ -192,7 +192,7 @@ publicComponentRouter.get("/", async (req: Request, res: Response) => {
  *               properties:
  *                 error:
  *                   type: string
- *                   example: "Component not found"
+ *                   example: "Component not found."
  *       500:
  *         description: Internal server error.
  *         content:
@@ -202,27 +202,27 @@ publicComponentRouter.get("/", async (req: Request, res: Response) => {
  *               properties:
  *                 error:
  *                   type: string
- *                   example: "Internal server error"
+ *                   example: "Internal server error."
  */
 publicComponentRouter.get("/:id", async (req: Request, res: Response) => {
     try {
         const componentId = parseInt(req.params.id, 10); // Convert the ID to a number
         if (isNaN(componentId)) {
-            res.status(400).json({ error: "Invalid component ID" });
+            res.status(400).json({ error: "Invalid component ID." });
             return;
         }
 
         const component = await fetchComponentById(prisma, componentId);
 
         if (!component) {
-            res.status(404).json({ error: "Component not found" });
+            res.status(404).json({ error: "Component not found." });
             return;
         }
 
         res.status(200).json(component);
     } catch (error) {
         console.error("Error fetching component:", error);
-        res.status(500).json({ error: "Internal server error" });
+        res.status(500).json({ error: "Internal server error." });
     }
 });
 
