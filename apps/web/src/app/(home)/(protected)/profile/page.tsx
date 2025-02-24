@@ -1,26 +1,31 @@
 import React from "react";
-import Link from "next/link";
 import { Plus } from "lucide-react";
-import ComponentCard from "@/src/components/ComponentCard";
+import Link from "next/link";
+import UserBanner from "@/src/components/UserBanner";
 
-const Liked = () => {
+const Profile = () => {
     return (
         <div className="flex flex-col h-screen p-8">
-            <div className="flex justify-between mt-6 ml-1">
-                <h1 className="text-3xl font-bold">Liked components</h1>
+            {" "}
+            {/* maybe make padding consistent across pages */}
+            <UserBanner
+                username="@USERNAME"
+                totalLikes={23193}
+                totalDownloads={492102}
+            />
+            <div className="flex justify-between mt-10 ml-1">
+                <h1 className="text-3xl font-bold">Your components</h1>
                 <Link
                     href="/create"
                     className="flex items-center gap-1 bg-gray-200 px-4 py-2"
                 >
-                    {" "}
-                    {/* why is this button here??? */}
                     <Plus className="h-4 w-4" /> new component
                 </Link>
             </div>
-            {/* maybe add filtering here? */}
-
             <div className="grid grid-cols-3 gap-4 mt-8">
-                {[...Array(12)].map((_, i) => (
+                {" "}
+                {/* only 2 rows fit on my screen... */}
+                {/* {[...Array(6)].map((_, i) => (
                     <ComponentCard
                         key={i}
                         title="My Awesome Button"
@@ -31,12 +36,11 @@ const Liked = () => {
                         downloads={293}
                         href="/view"
                     />
-                ))}
+                ))} */}
             </div>
-
             {/*TODO: add pagination*/}
         </div>
     );
 };
 
-export default Liked;
+export default Profile;

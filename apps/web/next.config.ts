@@ -5,7 +5,7 @@ const nextConfig: NextConfig = {
     webpack: (config) => {
         config.plugins.push(new MiniCssExtractPlugin());
         return config;
-    }
+    },
 };
 
 export default nextConfig;

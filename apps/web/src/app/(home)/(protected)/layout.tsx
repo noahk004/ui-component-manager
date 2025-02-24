@@ -1,7 +1,7 @@
-"use client";
-
 import Sidebar from "@/src/components/Sidebar";
-import ProtectedRoute from "@/src/components/ProtectedRoute";
+import AuthGuard from "@/src/guards/AuthGuard";
+
+import "../../globals.css";
 
 export default function HomeLayout({
     children,
@@ -9,11 +9,11 @@ export default function HomeLayout({
     children: React.ReactNode;
 }) {
     return (
-        <ProtectedRoute>
+        <AuthGuard>
             <div className="flex h-screen">
                 <Sidebar />
                 <div className="flex-1">{children}</div>
             </div>
-        </ProtectedRoute>
+        </AuthGuard>
     );
 }

@@ -1,31 +1,23 @@
-'use client';
-
 import React from "react";
-import { isAuthenticated } from '../../utils/auth';
-import { useRouter } from 'next/navigation';
+import Link from "next/link";
 
-
-const Hero = () => {
-    const router = useRouter();
-
-    const handleClick = () => {
-        if (isAuthenticated()) {
-            router.push("/dashboard");
-        } else {
-            router.push("/login");
-        }
-    };
+const HeroPage = () => {
     return (
-        <div className="flex flex-col w-screen h-screen justify-center items-center bg-gray-300">
-            <p className="text-2xl font-bold">Hero</p>
-            <button
-                onClick={handleClick}
-                className="mt-4 px-4 py-2 bg-white text-sm hover:bg-gray-200"
+        <div className="flex flex-col w-screen h-screen justify-center items-center">
+            <h1 className="text-5xl mb-2">
+                <Link href="/">UICM</Link>
+            </h1>
+            <h2 className="text-xl font-light mb-6">
+                Build and import UI components. It’s that simple.
+            </h2>
+            <Link
+                href="/dashboard"
+                className="px-4 py-2 bg-foreground text-background rounded-md"
             >
-                Log In
-            </button>
+                Get Started
+            </Link>
         </div>
     );
 };
 
-export default Hero;
+export default HeroPage;

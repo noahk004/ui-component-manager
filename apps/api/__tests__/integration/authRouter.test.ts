@@ -106,7 +106,7 @@ describe("POST /api/auth/signup", () => {
     it("should return 400 if required fields are missing", async () => {
         const response = await request(app).post("/api/auth/signup").send({});
         expect(response.status).toBe(400);
-        expect(response.body.error).toBe("All fields are required");
+        expect(response.body.error).toBe("All fields are required.");
     });
 
     it("should return 400 if email is already in use", async () => {
@@ -121,7 +121,7 @@ describe("POST /api/auth/signup", () => {
         });
 
         expect(response.status).toBe(400);
-        expect(response.body.error).toBe("Email already in use");
+        expect(response.body.error).toBe("Email or username already in use.");
     });
 
     it("should return 400 if username is already taken", async () => {
@@ -158,7 +158,7 @@ describe("POST /api/auth/signup", () => {
         });
 
         expect(response.status).toBe(201);
-        expect(response.body.message).toBe("User created successfully");
+        expect(response.body.message).toBe("User created successfully.");
         expect(response.body.user).toEqual({
             id: 1,
             email: "newuser@example.com",
@@ -178,6 +178,6 @@ describe("POST /api/auth/signup", () => {
         });
 
         expect(response.status).toBe(500);
-        expect(response.body.error).toBe("Internal server error");
+        expect(response.body.error).toBe("Internal server error.");
     });
 });

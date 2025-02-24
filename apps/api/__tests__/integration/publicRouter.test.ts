@@ -59,7 +59,7 @@ describe("GET /api/components/:id", () => {
     it("returns 400 for invalid component ID", async () => {
         const response = await request(app).get("/api/components/invalid-id");
         expect(response.status).toBe(400);
-        expect(response.body).toEqual({ error: "Invalid component ID" });
+        expect(response.body).toEqual({ error: "Invalid component ID." });
     });
 
     it("returns 404 if the component is not found", async () => {
@@ -67,7 +67,7 @@ describe("GET /api/components/:id", () => {
 
         const response = await request(app).get("/api/components/999");
         expect(response.status).toBe(404);
-        expect(response.body).toEqual({ error: "Component not found" });
+        expect(response.body).toEqual({ error: "Component not found." });
     });
 
     it("returns 200 and the component for a valid ID", async () => {
@@ -94,6 +94,6 @@ describe("GET /api/components/:id", () => {
 
         const response = await request(app).get("/api/components/1");
         expect(response.status).toBe(500);
-        expect(response.body).toEqual({ error: "Internal server error" });
+        expect(response.body).toEqual({ error: "Internal server error." });
     });
 });

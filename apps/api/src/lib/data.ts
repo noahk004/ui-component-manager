@@ -2,9 +2,160 @@ import { PrismaClient, Component } from "@prisma/client";
 
 import { uploadOne, deleteOne, getS3Path } from "./s3";
 
-export async function fetchComponents(prisma: PrismaClient) {
-    const components = await prisma.component.findMany();
-    return components;
+export async function fetchComponents(
+    prisma: PrismaClient,
+    search?: string,
+    tags?: string[],
+    page: number = 1, // ✅ Default to page 1
+    limit: number = 10 // ✅ Default 10 items per page
+) {
+    const skip = (page - 1) * limit; // ✅ Calculate items to skip
+
+    const components = await prisma.component.findMany({
+        where: {
+            AND: [
+                search
+                    ? {
+                          OR: [
+                              {
+                                  title: {
+                                      contains: search,
+                                      mode: "insensitive",
+                                  },
+                              },
+                              {
+                                  alias: {
+                                      contains: search,
+                                      mode: "insensitive",
+                                  },
+                              },
+                              {
+                                  description: {
+                                      contains: search,
+                                      mode: "insensitive",
+                                  },
+                              },
+                              {
+                                  user: {
+                                      username: {
+                                          contains: search,
+                                          mode: "insensitive",
+                                      },
+                                  },
+                              },
+                          ],
+                      }
+                    : {},
+                tags && tags.length > 0
+                    ? {
+                          AND: tags.map((tagName) => ({
+                              componentTags: {
+                                  some: {
+                                      tag: {
+                                          name: tagName, // Search by name instead of ID
+                                      },
+                                  },
+                              },
+                          })),
+                      }
+                    : {},
+            ],
+        },
+
+        select: {
+            id: true,
+            title: true,
+            description: true,
+            user: {
+                select: {
+                    id: true,
+                    username: true,
+                },
+            },
+            componentTags: {
+                select: {
+                    tag: {
+                        select: {
+                            id: true,
+                            name: true,
+                        },
+                    },
+                },
+            },
+            _count: {
+                select: {
+                    likes: true,
+                    downloads: true,
+                },
+            },
+        },
+
+        skip, // Skip previous pages
+        take: limit, // Limit results per page
+    });
+
+    // ✅ Get total count of components matching criteria
+    const totalCount = await prisma.component.count({
+        where: {
+            AND: [
+                search
+                    ? {
+                          OR: [
+                              {
+                                  title: {
+                                      contains: search,
+                                      mode: "insensitive",
+                                  },
+                              },
+                              {
+                                  alias: {
+                                      contains: search,
+                                      mode: "insensitive",
+                                  },
+                              },
+                              {
+                                  description: {
+                                      contains: search,
+                                      mode: "insensitive",
+                                  },
+                              },
+                              {
+                                  user: {
+                                      username: {
+                                          contains: search,
+                                          mode: "insensitive",
+                                      },
+                                  },
+                              },
+                          ],
+                      }
+                    : {},
+                tags && tags.length > 0
+                    ? {
+                          AND: tags.map((tagName) => ({
+                              componentTags: {
+                                  some: {
+                                      tag: {
+                                          name: tagName,
+                                      },
+                                  },
+                              },
+                          })),
+                      }
+                    : {},
+            ],
+        },
+    });
+
+    return {
+        components,
+        pagination: {
+            totalItems: totalCount,
+            totalPages: Math.ceil(totalCount / limit),
+            currentPage: page,
+            itemsPerPage: limit,
+        },
+    };
 }
 
 export async function fetchComponentById(
@@ -120,4 +271,12 @@ export async function deleteComponent(
     await prisma.component.deleteMany({
         where: { id: component.id },
     });
+}
+
+export async function getTags(prisma: PrismaClient) {
+    const data = await prisma.tag.findMany({
+        select: { name: true },
+    });
+
+    return data.map((tag) => tag.name);
 }
