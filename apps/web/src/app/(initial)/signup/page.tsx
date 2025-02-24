@@ -1,7 +1,7 @@
 import SignupForm from "@/src/components/SignupForm";
 import TopBar from "@/src/components/TopBar";
 
-import Link from "next/link"
+import Link from "next/link";
 
 const Signup = () => {
     return (

@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
-import Link from "next/link"
+import Link from "next/link";
 
 import LoginForm from "@/src/components/LoginForm";
 import TopBar from "@/src/components/TopBar";

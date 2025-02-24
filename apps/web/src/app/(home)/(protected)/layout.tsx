@@ -1,7 +1,7 @@
 import Sidebar from "@/src/components/Sidebar";
 import AuthGuard from "@/src/guards/AuthGuard";
 
-import "../../globals.css"
+import "../../globals.css";
 
 export default function HomeLayout({
     children,

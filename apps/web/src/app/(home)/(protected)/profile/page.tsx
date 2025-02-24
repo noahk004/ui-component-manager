@@ -1,7 +1,6 @@
 import React from "react";
 import { Plus } from "lucide-react";
 import Link from "next/link";
-import ComponentCard from "@/src/components/ComponentCard";
 import UserBanner from "@/src/components/UserBanner";
 
 const Profile = () => {
@@ -26,7 +25,7 @@ const Profile = () => {
             <div className="grid grid-cols-3 gap-4 mt-8">
                 {" "}
                 {/* only 2 rows fit on my screen... */}
-                {[...Array(6)].map((_, i) => (
+                {/* {[...Array(6)].map((_, i) => (
                     <ComponentCard
                         key={i}
                         title="My Awesome Button"
@@ -37,7 +36,7 @@ const Profile = () => {
                         downloads={293}
                         href="/view"
                     />
-                ))}
+                ))} */}
             </div>
             {/*TODO: add pagination*/}
         </div>

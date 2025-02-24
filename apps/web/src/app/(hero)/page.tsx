@@ -7,7 +7,9 @@ const HeroPage = () => {
             <h1 className="text-5xl mb-2">
                 <Link href="/">UICM</Link>
             </h1>
-            <h2 className="text-xl font-light mb-6">Build and import UI components. It’s that simple.</h2>
+            <h2 className="text-xl font-light mb-6">
+                Build and import UI components. It’s that simple.
+            </h2>
             <Link
                 href="/dashboard"
                 className="px-4 py-2 bg-foreground text-background rounded-md"

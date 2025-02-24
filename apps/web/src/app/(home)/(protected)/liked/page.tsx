@@ -1,7 +1,6 @@
 import React from "react";
 import Link from "next/link";
 import { Plus } from "lucide-react";
-import ComponentCard from "@/src/components/ComponentCard";
 
 const Liked = () => {
     return (
@@ -19,7 +18,7 @@ const Liked = () => {
             </div>
             {/* maybe add filtering here? */}
 
-            <div className="grid grid-cols-3 gap-4 mt-8">
+            {/* <div className="grid grid-cols-3 gap-4 mt-8">
                 {[...Array(12)].map((_, i) => (
                     <ComponentCard
                         key={i}
@@ -29,10 +28,10 @@ const Liked = () => {
                         username="@somerandomuser"
                         likes={293}
                         downloads={293}
-                        href="/view"
+                        href="/components/${i}"
                     />
                 ))}
-            </div>
+            </div> */}
 
             {/*TODO: add pagination*/}
         </div>

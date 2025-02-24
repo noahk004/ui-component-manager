@@ -52,7 +52,10 @@ export default function Sidebar() {
                             USERNAME
                         </Link>
                     </p>
-                    <button onClick={handleLogout} className="font-semibold text-left">
+                    <button
+                        onClick={handleLogout}
+                        className="font-semibold text-left"
+                    >
                         Log Out
                     </button>
                 </div>

@@ -14,7 +14,7 @@ const SearchBar = ({
     const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        const tagString = Array.from(tags).join(",")
+        const tagString = Array.from(tags).join(",");
 
         const response = await getComponents({
             search: searchTerm,

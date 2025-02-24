@@ -14,10 +14,13 @@ export default function ComponentCard({
     likes,
     downloads,
 }: ComponentCardProps) {
-    const href = `/components/${id}`
+    const href = `/components/${id}`;
 
     return (
-        <Link href={href} className="px-5 py-4 border-[1px] border-foreground rounded-lg">
+        <Link
+            href={href}
+            className="px-5 py-4 border-[1px] border-foreground rounded-lg"
+        >
             <h3 className="text-xl font-bold">{title}</h3>
             <p className="text-sm">{type}</p>
             <p className="text-sm mt-2">{description}</p>

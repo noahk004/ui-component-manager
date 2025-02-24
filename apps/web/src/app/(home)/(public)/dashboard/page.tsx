@@ -4,7 +4,7 @@ import { getComponents, getTags } from "@/src/services/dataService";
 
 const DashboardPage = async () => {
     const components = await getComponents({
-        limit: "30"
+        limit: "30",
     });
     const tags = await getTags();
 
@@ -19,9 +19,7 @@ const DashboardPage = async () => {
     const tagData = await tags.json();
     const componentData = await components.json();
 
-    return (
-        <Dashboard allTags={tagData} initialComponentData={componentData} />
-    );
+    return <Dashboard allTags={tagData} initialComponentData={componentData} />;
 };
 
 export default DashboardPage;

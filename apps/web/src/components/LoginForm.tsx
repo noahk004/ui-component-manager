@@ -63,7 +63,12 @@ const LoginForm = () => {
                     </FieldError>
                 </TextField>
 
-                <TextField name="password" type="password" isRequired className="flex flex-col">
+                <TextField
+                    name="password"
+                    type="password"
+                    isRequired
+                    className="flex flex-col"
+                >
                     <Label>Password</Label>
                     <Input className="ring-[.5px] ring-foreground rounded-md p-2" />
                     <FieldError className="text-red-500">

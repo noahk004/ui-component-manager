@@ -16,7 +16,9 @@ export function getPath(...args: string[]) {
     return result;
 }
 
-export function getSearchParams(params: undefined | Record<string, string>): string {
+export function getSearchParams(
+    params: undefined | Record<string, string>
+): string {
     if (!params) {
         return "";
     }
