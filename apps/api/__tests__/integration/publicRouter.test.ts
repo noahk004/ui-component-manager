@@ -94,6 +94,6 @@ describe("GET /api/components/:id", () => {
 
         const response = await request(app).get("/api/components/1");
         expect(response.status).toBe(500);
-        expect(response.body).toEqual({ error: "Internal server error" });
+        expect(response.body).toEqual({ error: "Internal server error." });
     });
 });
