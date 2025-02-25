@@ -10,11 +10,11 @@ export default async function HomeLayout({
 }: {
     children: React.ReactNode;
 }) {
-    const cookieStore = await cookies()
-    const token = cookieStore.get("token")?.value
+    const cookieStore = await cookies();
+    const token = cookieStore.get("token")?.value;
 
     let user = null;
-    
+
     if (token) {
         try {
             user = decode(token) as JwtPayload;

@@ -31,7 +31,7 @@ export async function logout(): Promise<void | Response> {
                 "Content-Type": "application/json",
             },
             credentials: "include",
-        })
+        });
 
         return response;
     } catch (error) {
