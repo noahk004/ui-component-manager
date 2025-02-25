@@ -50,7 +50,7 @@ const LoginForm = () => {
     return (
         <Form
             onSubmit={onSubmit}
-            className="px-6 max-w-80 ring-[.5px] ring-foreground rounded-xl pt-6 pb-4 animate-in fade-in"
+            className="px-6 max-w-80 ring-[.5px] ring-foreground rounded-xl pt-6 pb-4 animate-in fade-in duration-300"
         >
             <h1 className="text-2xl mb-2">Sign In</h1>
 

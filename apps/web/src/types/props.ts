@@ -2,6 +2,7 @@ import { Dispatch, SetStateAction } from "react";
 import { Selection } from "react-aria-components";
 
 import { ComponentData } from "./types";
+import { JwtPayload } from "jsonwebtoken";
 
 export interface SearchBarProps {
     tags: Selection;
@@ -37,4 +38,8 @@ export interface ComponentCardProps {
 export interface DashboardProps {
     allTags: Selection;
     initialComponentData: ComponentData;
+}
+
+export interface SidebarProps {
+    user: null | JwtPayload;
 }

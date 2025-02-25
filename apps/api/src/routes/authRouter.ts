@@ -242,4 +242,48 @@ authRouter.post("/signup", async (req: Request, res: Response) => {
     }
 });
 
+/**
+ * @swagger
+ * /api/auth/logout:
+ *   post:
+ *     summary: Log out a user
+ *     tags: [Auth]
+ *     description: Logs out a user by clearing the authentication cookie.
+ *     responses:
+ *       200:
+ *         description: Logout successful.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Logout successful."
+ *       500:
+ *         description: Internal server error.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: "Internal server error."
+ */
+authRouter.post("/logout", (req: Request, res: Response) => {
+    try {
+        res.clearCookie("token", {
+            httpOnly: true,
+            secure: true,
+            sameSite: "none",
+        });
+
+        res.json({ message: "Logout successful." });
+    } catch (error) {
+        console.error("Logout error:", error);
+        res.status(500).json({ error: "Internal server error." });
+    }
+});
+
 export default authRouter;

@@ -6,6 +6,9 @@ const nextConfig: NextConfig = {
         config.plugins.push(new MiniCssExtractPlugin());
         return config;
     },
+    images: {
+        domains: ["placehold.co"],
+    },
 };
 
 export default nextConfig;
