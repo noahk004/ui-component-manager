@@ -8,7 +8,7 @@ const nextConfig: NextConfig = {
     },
     images: {
         domains: ["placehold.co"],
-    }
+    },
 };
 
 export default nextConfig;

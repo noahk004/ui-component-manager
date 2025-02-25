@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image"
+import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import clsx from "clsx";
 import { SidebarProps } from "../types/props";
@@ -48,7 +48,7 @@ export default function Sidebar({ user }: SidebarProps) {
                             width={50}
                             height={50}
                             className="rounded-full"
-                            unoptimized      // TODO: add user profile images and remove unoptimized
+                            unoptimized // TODO: add user profile images and remove unoptimized
                         />
                         <div className="flex flex-col text-sm">
                             <p>
