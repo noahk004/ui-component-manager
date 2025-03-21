@@ -2,6 +2,7 @@ import { cookies } from "next/headers";
 import { decode, JwtPayload } from "jsonwebtoken";
 
 import Sidebar from "@/src/components/Sidebar";
+import TopBar from "@/src/components/TopBar";
 
 import "../../globals.css";
 
@@ -24,9 +25,14 @@ export default async function HomeLayout({
     }
 
     return (
-        <div className="flex h-screen">
-            <Sidebar user={user} />
-            <div className="flex-1 ms-64">{children}</div>
+        <div className="flex flex-col h-screen">
+            <div className="sticky top-0 z-10">
+                <TopBar />
+            </div>
+            <div className="flex flex-1">
+                <Sidebar user={user} />
+                <div className="flex-1 ms-64">{children}</div>
+            </div>
         </div>
     );
 }

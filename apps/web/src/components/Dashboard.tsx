@@ -19,9 +19,8 @@ const Dashboard = ({ allTags, initialComponentData }: DashboardProps) => {
         useState<ComponentData>(initialComponentData);
 
     return (
-        <div className="flex flex-col h-screen p-20 animate-in fade-in slide-in-from-left-24 duration-500">
-            <h1 className="text-3xl font-bold mb-4">Find a component</h1>
-
+        <div className="flex flex-col h-screen px-10 pt-8 animate-in fade-in slide-in-from-left-24 duration-500">
+            <h1 className="text-4xl font-semibold mb-4">Components</h1>
             <SearchBar
                 tags={selectedTags}
                 searchTerm={searchTerm}

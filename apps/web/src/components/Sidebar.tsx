@@ -6,13 +6,8 @@ import { usePathname, useRouter } from "next/navigation";
 import clsx from "clsx";
 import { SidebarProps } from "../types/props";
 import { logout } from "../services/authService";
+import { Star, Layers3, Palette, LucideFileText, LucideType, LucideMap } from "lucide-react";
 
-const links = [
-    { href: "/dashboard", label: "Search" },
-    { href: "/docs", label: "Docs" },
-    { href: "/liked", label: "Liked" },
-    { href: "/create", label: "Create" },
-];
 
 export default function Sidebar({ user }: SidebarProps) {
     const pathname = usePathname();
@@ -22,55 +17,43 @@ export default function Sidebar({ user }: SidebarProps) {
         await logout();
         router.push("/login");
     };
+    
+    const uiFilters = ["Buttons", "Cards", "Headers", "Modals"]
+    const formFilters = ["Input", "Select", "Checkbox"]
 
     return (
-        <div className="w-64 p-8 flex flex-col fixed h-full border-r border-foreground">
-            <h1 className="text-4xl mb-4">UICM</h1>
-            <nav className="flex flex-col gap-1">
-                {links.map(({ href, label }) => (
-                    <Link
-                        key={href}
-                        href={href}
-                        className={clsx({
-                            "font-semibold": href === pathname,
-                        })}
-                    >
-                        {label}
-                    </Link>
-                ))}
-            </nav>
-            <div className="mt-auto">
-                {user ? (
-                    <div className="flex flex-row gap-3 items-center mt-auto">
-                        <Image
-                            src="https://placehold.co/400"
-                            alt="Profile photo"
-                            width={50}
-                            height={50}
-                            className="rounded-full"
-                            unoptimized // TODO: add user profile images and remove unoptimized
-                        />
-                        <div className="flex flex-col text-sm">
-                            <p>
-                                @
-                                <Link
-                                    href={`/profile/${user.userId}`}
-                                    className="underline underline-offset-2"
-                                >
-                                    {user.username}
-                                </Link>
-                            </p>
-                            <button
-                                onClick={handleLogout}
-                                className="font-semibold text-left"
-                            >
-                                Log Out
-                            </button>
-                        </div>
-                    </div>
-                ) : (
-                    <Link href="/login">Log In</Link>
-                )}
+        <div className="w-64 flex flex-col fixed h-full border-r border-foreground">
+            <button>
+                Upload
+            </button>
+            <h2 className="text-xl font-semibold ml-6 mt-6 mb-2">Categories</h2>
+            <div className="flex gap-2 w-full pl-6 py-3 items-center hover:bg-white hover:text-black">
+                <Star className="h-4 w-4" /> Favorites
+            </div>
+            <div className="flex gap-2 w-full pl-6 py-3 items-center hover:bg-white hover:text-black">
+                <Layers3 className="h-4 w-4" /> All Components
+            </div>
+            <div className="flex gap-2 w-full pl-6 py-3 items-center hover:bg-white hover:text-black">
+                <Palette className="h-4 w-4" /> UI Elements
+            </div>
+            {uiFilters.map((filter) => (
+                <div className="flex gap-2 w-full pl-14 py-3 items-center hover:bg-white hover:text-black">
+                    {filter}
+                </div>
+            ))}
+            <div className="flex gap-2 w-full pl-6 py-3 items-center hover:bg-white hover:text-black">
+                <LucideFileText className="h-4 w-4" /> Forms
+            </div>
+            {formFilters.map((filter) => (
+                <div className="flex gap-2 w-full pl-14 py-3 items-center hover:bg-white hover:text-black">
+                    {filter}
+                </div>
+            ))}
+            <div className="flex gap-2 w-full pl-6 py-3 items-center hover:bg-white hover:text-black">
+                <LucideMap className="h-4 w-4" /> Layouts
+            </div>
+            <div className="flex gap-2 w-full pl-6 py-3 items-center hover:bg-white hover:text-black">
+                <LucideType className="h-4 w-4" /> Typography
             </div>
         </div>
     );
