@@ -45,6 +45,7 @@ export async function signUp(
 ): Promise<void | Response> {
     try {
         const path = getPath("auth", "signup");
+        console.log("Sending signup request to:", path, "with data:", data);
 
         const response = await fetch(path, {
             method: "POST",
@@ -54,7 +55,13 @@ export async function signUp(
             credentials: "include",
             body: JSON.stringify(data),
         });
-
+        
+        console.log("Signup response:", response.status);
+        if (!response.ok) {
+            const errorData = await response.json();
+            console.error("Signup error:", errorData);
+        }
+        
         return response;
     } catch (error) {
         console.error("Something went wrong while signing up:", error);

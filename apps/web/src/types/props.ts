@@ -40,6 +40,6 @@ export interface DashboardProps {
     initialComponentData: ComponentData;
 }
 
-export interface SidebarProps {
+export interface TopBarProps {
     user: null | JwtPayload;
 }

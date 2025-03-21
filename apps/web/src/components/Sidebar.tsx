@@ -4,28 +4,18 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import clsx from "clsx";
-import { SidebarProps } from "../types/props";
-import { logout } from "../services/authService";
 import { Star, Layers3, Palette, LucideFileText, LucideType, LucideMap } from "lucide-react";
 
 
-export default function Sidebar({ user }: SidebarProps) {
+export default function Sidebar() {
     const pathname = usePathname();
     const router = useRouter();
-
-    const handleLogout = async () => {
-        await logout();
-        router.push("/login");
-    };
     
     const uiFilters = ["Buttons", "Cards", "Headers", "Modals"]
     const formFilters = ["Input", "Select", "Checkbox"]
 
     return (
         <div className="w-64 flex flex-col fixed h-full border-r border-foreground">
-            <button>
-                Upload
-            </button>
             <h2 className="text-xl font-semibold ml-6 mt-6 mb-2">Categories</h2>
             <div className="flex gap-2 w-full pl-6 py-3 items-center hover:bg-white hover:text-black">
                 <Star className="h-4 w-4" /> Favorites

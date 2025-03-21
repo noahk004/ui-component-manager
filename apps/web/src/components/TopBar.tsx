@@ -1,20 +1,24 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
+import { TopBarProps } from "../types/props";
+import { logout } from "../services/authService";
+import { useRouter } from "next/navigation";
 
-// Define a User type for the prop
-type User = {
-  username: string;
-  profilePicture?: string;
-};
-
-// Update component to accept user prop
-export default function TopBar({ user }: { user?: User }) {
+export default function TopBar({ user }: TopBarProps) {
+    const router = useRouter();
 
     const links = [
         { href: "/dashboard", label: "Components" },
         { href: "/docs", label: "Documentation" },
         //{ href: "/create", label: "Create" },
     ];
+
+    const handleLogout = async () => {
+        await logout();
+        router.push("/login");
+    };
 
     return (
         <div className="py-4 bg-black border-b border-border w-full">
@@ -28,8 +32,7 @@ export default function TopBar({ user }: { user?: User }) {
                     ))}
                 </div>
                 
-                {/* Conditional rendering based on user authentication */}
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 cursor-pointer" onClick={handleLogout}>
                     {user ? (
                         // User is logged in - show profile info
                         <div className="flex items-center gap-3">

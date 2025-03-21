@@ -27,10 +27,10 @@ export default async function HomeLayout({
     return (
         <div className="flex flex-col h-screen">
             <div className="sticky top-0 z-10">
-                <TopBar />
+                <TopBar user={user} />
             </div>
             <div className="flex flex-1">
-                <Sidebar user={user} />
+                <Sidebar />
                 <div className="flex-1 ms-64">{children}</div>
             </div>
         </div>

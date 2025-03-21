@@ -64,7 +64,7 @@ const SignupForm = () => {
             <Group className="flex flex-col gap-3 mb-1 font-light">
                 <TextField name="email" isRequired className="flex flex-col">
                     <Label>Email</Label>
-                    <Input className="ring-[.5px] ring-foreground rounded-md p-2" />
+                    <Input className="ring-[.5px] ring-foreground rounded-md p-2 text-black" />
                     <FieldError className="text-red-500">
                         Email missing or invalid.
                     </FieldError>
@@ -72,7 +72,7 @@ const SignupForm = () => {
 
                 <TextField name="username" isRequired className="flex flex-col">
                     <Label>Username</Label>
-                    <Input className="ring-[.5px] ring-foreground rounded-md p-2" />
+                    <Input className="ring-[.5px] ring-foreground rounded-md p-2 text-black" />
                     <FieldError className="text-red-500">
                         Username missing or invalid.
                     </FieldError>

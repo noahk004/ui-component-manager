@@ -55,7 +55,7 @@ const LoginForm = () => {
             <h1 className="text-2xl mb-2">Sign In</h1>
 
             <Group className="flex flex-col gap-3 mb-1 font-light">
-                <TextField name="username" isRequired className="flex flex-col">
+                <TextField name="username" isRequired className="flex flex-col text-black">
                     <Label>Username</Label>
                     <Input className="ring-[.5px] ring-foreground rounded-md p-2" />
                     <FieldError className="text-red-500">
@@ -70,7 +70,7 @@ const LoginForm = () => {
                     className="flex flex-col"
                 >
                     <Label>Password</Label>
-                    <Input className="ring-[.5px] ring-foreground rounded-md p-2" />
+                    <Input className="ring-[.5px] ring-foreground rounded-md p-2 text-black" />
                     <FieldError className="text-red-500">
                         Password missing or invalid.
                     </FieldError>
