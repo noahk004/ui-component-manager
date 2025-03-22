@@ -26,16 +26,22 @@ export default function Sidebar() {
             <div className="flex gap-2 w-full pl-6 py-3 items-center hover:bg-white hover:text-black">
                 <Palette className="h-4 w-4" /> UI Elements
             </div>
-            {uiFilters.map((filter) => (
-                <div className="flex gap-2 w-full pl-14 py-3 items-center hover:bg-white hover:text-black">
+            {uiFilters.map((filter, index) => (
+                <div 
+                    key={`ui-filter-${index}`} 
+                    className="flex gap-2 w-full pl-14 py-3 items-center hover:bg-white hover:text-black"
+                >
                     {filter}
                 </div>
             ))}
             <div className="flex gap-2 w-full pl-6 py-3 items-center hover:bg-white hover:text-black">
                 <LucideFileText className="h-4 w-4" /> Forms
             </div>
-            {formFilters.map((filter) => (
-                <div className="flex gap-2 w-full pl-14 py-3 items-center hover:bg-white hover:text-black">
+            {formFilters.map((filter, index) => (
+                <div 
+                    key={`form-filter-${index}`} 
+                    className="flex gap-2 w-full pl-14 py-3 items-center hover:bg-white hover:text-black"
+                >
                     {filter}
                 </div>
             ))}
