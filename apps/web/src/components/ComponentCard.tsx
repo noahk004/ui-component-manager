@@ -19,8 +19,9 @@ export default function ComponentCard({
     return (
         <Link
             href={href}
-            className="px-5 py-4 border-[1px] border-foreground rounded-lg"
+            className="p-2 border-[1px] border-foreground rounded-lg"
         >
+            <div className="w-full h-48 bg-gray-100 rounded-md mb-4 flex items-center justify-center"/>
             <h3 className="text-xl font-bold">{title}</h3>
             <p className="text-sm">{type}</p>
             <p className="text-sm mt-2">{description}</p>
