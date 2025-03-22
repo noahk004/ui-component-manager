@@ -15,7 +15,7 @@ export default function Sidebar() {
     const formFilters = ["Input", "Select", "Checkbox"]
 
     return (
-        <div className="w-64 flex flex-col fixed h-full border-r border-foreground">
+        <div className="w-56 flex flex-col fixed h-full border-r border-foreground">
             <h2 className="text-xl font-semibold ml-6 mt-6 mb-2">Categories</h2>
             <div className="flex gap-2 w-full pl-6 py-3 items-center hover:bg-white hover:text-black">
                 <Star className="h-4 w-4" /> Favorites

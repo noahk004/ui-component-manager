@@ -31,7 +31,7 @@ export default async function HomeLayout({
             </div>
             <div className="flex flex-1">
                 <Sidebar />
-                <div className="flex-1 ms-64">{children}</div>
+                <div className="flex-1 ms-56">{children}</div>
             </div>
         </div>
     );

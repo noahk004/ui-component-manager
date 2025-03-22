@@ -18,12 +18,11 @@ async function main() {
         prisma.tag.create({ data: { name: "Modal" } }),
         prisma.tag.create({ data: { name: "Card" } }),
         prisma.tag.create({ data: { name: "Input" } }),
-        prisma.tag.create({ data: { name: "Navigation" } }),
-        prisma.tag.create({ data: { name: "Dark Mode" } }),
-        prisma.tag.create({ data: { name: "Sleek" } }),
-        prisma.tag.create({ data: { name: "Utility" } }),
-        prisma.tag.create({ data: { name: "Form" } }),
-        prisma.tag.create({ data: { name: "UI" } }),
+        prisma.tag.create({ data: { name: "Header" } }),
+        prisma.tag.create({ data: { name: "Select" } }),
+        prisma.tag.create({ data: { name: "Checkbox" } }),
+        prisma.tag.create({ data: { name: "Layout" } }),
+        prisma.tag.create({ data: { name: "Typography" } }),
     ]);
 
     console.log("Creating users...");
